@@ -21,7 +21,7 @@ const metadata = {
 }
 
 
-// export const BaseUrl = "https://inventory-apis.up.railway.app"
+export const BaseUrl = "https://inventory-apis.up.railway.app"
 export default function RootLayout({ children }) {
   // const tokken = Cookies.get("accessToken")
   // var decoded = jwt_decode(tokken);
