@@ -8,6 +8,7 @@ export default function middleware(req) {
     let cookie = req.cookies.get('islogged')
 
 
+
     if (url.pathname == ("/login") && cookie?.value == "true") {
         return NextResponse.redirect("http://localhost:3000/")
     }

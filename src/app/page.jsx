@@ -10,6 +10,7 @@ import token from '../../Atom/accessToken'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BaseUrl } from './layout'
+import Cookies from 'js-cookie'
 
 
 
@@ -18,6 +19,10 @@ export default function Home() {
 
   const [accessToken, setToken] = useRecoilState(token)
   const [data, setDate] = useState([])
+
+  if (Cookies.get("islogged") == undefined) {
+    Cookies.set('islogged', false)
+  }
 
   async function getMedicine() {
     const options = {
@@ -44,7 +49,7 @@ export default function Home() {
   useEffect(() => {
     getMedicine()
   }, [])
-  
+
   return (
     <Layout>
       <section className="home h-[calc(100vh-140px)]">

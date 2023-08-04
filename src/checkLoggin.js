@@ -10,4 +10,7 @@ export default function checkLog() {
       Cookies.set("islogged", false)
     }
   }
+  if (Cookies.get("accessToken") == undefined) {
+    Cookies.set("islogged", false)
+  }
 }
