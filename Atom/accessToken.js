@@ -2,7 +2,11 @@ import Cookies from "js-cookie";
 import { atom } from "recoil";
 
 
-const value = Cookies.get("accessToken")
+let value
+if (Cookies.get("accessToken")) {
+    value = Cookies.get("accessToken")
+}
+
 
 const token = atom({
     key: 'token',
