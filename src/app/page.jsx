@@ -14,6 +14,8 @@ import { BaseUrl } from './layout'
 
 
 export default function Home() {
+
+
   const [accessToken, setToken] = useRecoilState(token)
   const [data, setDate] = useState([])
 
@@ -42,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     getMedicine()
   }, [])
-
+  
   return (
     <Layout>
       <section className="home h-[calc(100vh-140px)]">

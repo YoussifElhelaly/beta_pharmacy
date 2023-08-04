@@ -16,6 +16,7 @@ import { toast } from "react-toastify"
 
 export default function Block() {
 
+
     const [currentPage, setCureentPage] = useState(true)
     const [addOpen, setAddOpen] = useRecoilState(addBlockOpen)
     const [listDisease, setListDisease] = useState([])

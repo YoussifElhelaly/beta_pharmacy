@@ -15,6 +15,7 @@ import DetailsProductOpen from "../../../Atom/DetailsProductOpen"
 export default function Inventory() {
 
 
+
     const [currentPage, setCureentPage] = useState(true)
     const [isProductOpen, setIsProductOpen] = useRecoilState(productOpen)
     const isOpen = useRecoilValue(DetailsProductOpen)

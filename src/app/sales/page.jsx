@@ -14,6 +14,8 @@ import openDetails from "../../../Atom/openDetails"
 import axios from "axios"
 
 export default function Sales() {
+
+
     const [isCreateOpen, setIsCreateOpen] = useRecoilState(createOpen)
     const isConfirmOpen = useRecoilValue(confirmOpen)
     const [data, setData] = useState([])
