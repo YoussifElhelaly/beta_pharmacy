@@ -39,6 +39,7 @@ export default function Login() {
                 window.location.reload()
             })
             .catch(function (error) {
+                console.log(error)
                 setError(true)
                 setMessage(error.response.data.message)
             });
