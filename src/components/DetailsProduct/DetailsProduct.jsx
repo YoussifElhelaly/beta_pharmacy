@@ -7,9 +7,11 @@ import DetailsProductOpen from '../../../Atom/DetailsProductOpen'
 import AddProduct from '../addProduct/addProduct'
 import editOpen from '../../../Atom/editOpen'
 import UpdateProduct from '../updateProduct/updateProduct'
+import search from '../../../Atom/search'
 
 function DetailsProduct(props) {
 
+    const [isSearch, setSearch] = useRecoilState(search)
     const [isOpen, setIsOpen] = useRecoilState(DetailsProductOpen)
     const [isEdit, setIsEdit] = useRecoilState(editOpen)
 
@@ -17,7 +19,10 @@ function DetailsProduct(props) {
 
         <div className="createSale  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary w-[1150px] ">
-                <Image alt='icon' onClick={() => setIsOpen(false)} src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
+                <Image alt='icon' onClick={() => {
+                    setSearch(false)
+                    setIsOpen(false)
+                }} src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                 <div className="showData my-5 flex gap-5 justify-between bg-[#EAEAEA] px-[50px] py-3">
                     <div className="details flex gap-5">
                         <div className="img w-[187px] h-[168px] rounded-md overflow-hidden">
