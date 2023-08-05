@@ -80,7 +80,6 @@ export default function Login() {
                                 <Image alt="icon" className="w-[20px] m-[10px] h-[20px]" src={passIcon}></Image>
                                 <input ref={passwordInp} type="password" id="password" name="password" className="rounded-[10px] p-[20px] w-full focus-visible:outline-none " placeholder="كلمة السر" />
                             </div>
-                            <a href="#" className="inline-block text-center text-primary mt-4">  أعادة تعيين كلمة المرور</a>
                         </div>
                         <button onClick={() => {
                             setIsLoading(true)
@@ -98,8 +97,7 @@ export default function Login() {
 
 
                         </button>
-                        <p className="text-center">ليس لديك حساب؟ <a href="#" className="text-primary">انشاء حساب</a></p>
-                    </div>
+                     </div>
                     <div className="img max-[767px]:absolute max-[767px]:opacity-[0.1]">
                         <Image src={loginIMG} alt="signup image"></Image>
                     </div>

@@ -15,9 +15,15 @@ function HomeBox(props) {
 
 
     async function getData() {
+        let url
+        if (props.title != undefined) {
+            url = `${BaseUrl}/analytics/${date ? "monthly" : "weekly"}-${props.type}/`
+        } else {
+            url = `${BaseUrl}/analytics/daily-${props.type}/`
+        }
         const options = {
             method: 'GET',
-            url: `${BaseUrl}/analytics/${date ? "monthly" : "weekly"}-${props.type}/`,
+            url: url,
             headers: {
                 "Authorization": `Bearer ${accessToken}`
             },
@@ -49,8 +55,10 @@ function HomeBox(props) {
         <div className="homeBox flex flex-col justify-between bg-bgPrimary rounded-[30px] h-[210px] w-[calc(33.33%-27px)] px-5 py-3">
             <div className="boxTop flex justify-between items-center">
                 <h3 className="font-semibold">
+                    {
+                        props.title == undefined ? "اجمالي الايرادات" : props.title
+                    }
 
-                    {props.title}
 
                 </h3>
                 <i className={`fa-solid fa-cart-shopping bg${props.secondry} p-4 rounded-full text${props.primary}`}></i>
@@ -76,13 +84,23 @@ function HomeBox(props) {
             <div className="boxFooter">
                 <div onClick={() => {
                     setDate(!date)
-                }} className={`toggleButton mt-[10px] flex px-3 text-[#fff] overflow-hidden relative mx-auto rounded-full justify-between bg${props.secondry} w-[110px] cursor-pointer`}>
-                    <p className="relative z-10">اسبوعيا</p>
-                    <p className="relative z-10 ">شهريا</p>
+                }} className={`toggleButton mt-[10px] flex px-3 text-[#fff] overflow-hidden relative mx-auto rounded-full justify-between bg${props.secondry} ${props.title == undefined ? "w-[55px]" : "w-[110px]"}  cursor-pointer`}>
+                    {
+                        props.title == undefined ?
+                            <p className="relative z-10 ">يوميا</p>
+                            : <>
+                                <p className="relative z-10">اسبوعيا</p>
+                                <p className="relative z-10 ">شهريا</p>
+                            </>
+                    }
                     <span className={`bg${props.primary}
-                      rounded-full w-[52%] h-full absolute
+                      rounded-full
+                      ${props.title == undefined ? "w-full" : "w-[52%]"} 
+                      
+                      
+                      h-full absolute
                       transition-[0.5s]
-                     ${date ? "left-[-1%]" : "left-[47%]"} 
+                     ${props.title == undefined ? "left-0" : date ? "left-[-1%]" : "left-[47%]"} 
                       `}></span>
                 </div>
             </div>

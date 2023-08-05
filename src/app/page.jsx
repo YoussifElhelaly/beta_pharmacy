@@ -59,10 +59,8 @@ export default function Home() {
         <div className="boxWrapper flex flex-wrap gap-x-[40px] gap-y-[30px]">
           <HomeBox type="orders" primary="Vilot" secondry="VilotLow" title="إجمالي المبيعات" />
           <HomeBox type="sales" primary="Red" secondry="RedLow" title="اجمالي الطلابات" />
-          <HomeBox primary="Vilot" secondry="VilotLow" />
-          <HomeBox primary="Vilot" secondry="VilotLow" />
+          <HomeBox primary="Green" secondry="GreenLow" type="sales" />
           <HomeBoxList loading={isLoading} secondry="GreenLow" data={data} name=" الدواء المضاف حديثا" />
-          <HomeBoxList loading={isLoading} secondry="RedLow" data={data} name="دواء تم حظرة بموجب لائحة طبية" />
         </div>
         <div className="infoWrapper flex justify-between mt-10">
           <SalesBox />

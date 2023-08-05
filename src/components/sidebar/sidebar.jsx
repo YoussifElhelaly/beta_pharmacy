@@ -67,16 +67,16 @@ function Sidebar() {
                     <Image className='ml-5' src={blockIcon} alt='icon'></Image>
                     <a className=" block w-full " href="../block">قائمة الحظر</a>
                 </li>
-                <li className={` ${pathName === "/adduser" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
+                <li className={` ${pathName === "/addUser" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     <Image className='ml-5' src={addUserIcon} alt='icon'></Image>
                     <a className=" block w-full " href="../addUser">إضافة صيدلي</a>
                 </li>
-                <li onClick={() => {
-                    logOut()
-
-                }} className={"flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]"}>
+                <li className={"flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]"}>
                     <Image className='ml-5' src={exitIcon} alt='icon'></Image>
-                    <a className=" block w-full " href="#">تسجيل الخروج</a>
+                    <span onClick={() => {
+                        logOut()
+
+                    }} className=" block w-full cursor-pointer" href="#">تسجيل الخروج</span>
                 </li>
             </ul>
         </div >
