@@ -15,19 +15,19 @@ export default function middleware(req) {
     if (url.pathname == ("/login") && cookie?.value == "true") {
         return NextResponse.redirect(new URL('/', req.url))
     }
-    if ((cookie?.value == "false") && url.pathname == ("/")) {
+    if (((cookie?.value == "false") || (cookie?.value == undefined)) && url.pathname == ("/")) {
         return NextResponse.redirect(new URL('/login', req.url))
     }
-    if ((cookie?.value == "false") && url.pathname == ("/sales")) {
+    if (((cookie?.value == "false") || (cookie?.value == undefined)) && url.pathname == ("/sales")) {
         return NextResponse.redirect(new URL('/login', req.url))
     }
-    if ((cookie?.value == "false") && url.pathname == ("/inventory")) {
+    if (((cookie?.value == "false") || (cookie?.value == undefined)) && url.pathname == ("/inventory")) {
         return NextResponse.redirect(new URL('/login', req.url))
     }
-    if ((cookie?.value == "false") && url.pathname == ("/block")) {
+    if (((cookie?.value == "false") || (cookie?.value == undefined)) && url.pathname == ("/block")) {
         return NextResponse.redirect(new URL('/login', req.url))
     }
-    if ((cookie?.value == "false") && url.pathname == ("/addUser")) {
+    if (((cookie?.value == "false") || (cookie?.value == undefined)) && url.pathname == ("/addUser")) {
         return NextResponse.redirect(new URL('/login', req.url))
     }
 }
