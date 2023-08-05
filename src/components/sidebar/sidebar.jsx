@@ -7,7 +7,7 @@ import inventoryIcon from '../../Img/inventoryIcon.png'
 import addUserIcon from '../../Img/addUserIcon.png'
 import exitIcon from '../../Img/exitIcon.png'
 import homeIcon from '../../Img/homeIcon.png'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Cookies from 'js-cookie'
 
@@ -16,10 +16,7 @@ import Cookies from 'js-cookie'
 
 function Sidebar() {
     const pathName = usePathname();
-    const url = useRouter()
 
-    console.log(pathName)
-    console.log(window.location.origin)
 
 
     return (
