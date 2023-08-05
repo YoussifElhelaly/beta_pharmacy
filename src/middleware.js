@@ -7,6 +7,10 @@ export default function middleware(req) {
     let url = req.nextUrl
     let cookie = req.cookies.get('islogged')
 
+    if (Cookies.get("accessToken") == undefined) {
+        Cookies.set("islogged", false)
+        Cookies.set("accessToken", "")
+    }
 
     if (url.pathname == ("/login") && cookie?.value == "true") {
         return NextResponse.redirect(new URL('/', req.url))
