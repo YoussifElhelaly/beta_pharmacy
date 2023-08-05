@@ -7,9 +7,9 @@ export default function middleware(req) {
     let url = req.nextUrl
     let cookie = req.cookies.get('islogged')
 
-    if (Cookies.get("accessToken") == undefined) {
-        Cookies.set("islogged", false)
-        Cookies.set("accessToken", "")
+    if (req.cookies.get("accessToken") == undefined) {
+        req.cookies.set("islogged", false)
+        req.cookies.set("accessToken", "")
     }
 
     if (url.pathname == ("/login") && cookie?.value == "true") {

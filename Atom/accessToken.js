@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { atom } from "recoil";
 
 
-let value
+let value = ""
 if (Cookies.get("accessToken")) {
     value = Cookies.get("accessToken")
 }

@@ -2,7 +2,7 @@ import jwt_decode from "jwt-decode";
 import Cookies from 'js-cookie'
 
 export default function checkLog() {
-  if (Cookies.get("accessToken") != "") {
+  if (Cookies.get("accessToken") != undefined && Cookies.get("accessToken") != "") {
     const tokken = Cookies.get("accessToken")
     var decoded = jwt_decode(tokken);
     var currentDate = new Date()
