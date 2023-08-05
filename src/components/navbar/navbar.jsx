@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import searchIcon from '../../Img/searchIcon.png'
-import notifIcon from '../../Img/notifIcon.png'
+import notifIcon from '../../Img/bellIcon.png'
 import person from '../../Img/personIcon.png'
 import { useEffect, useState } from "react"
 import axios from "axios"
