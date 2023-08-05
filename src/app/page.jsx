@@ -10,6 +10,7 @@ import token from '../../Atom/accessToken'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BaseUrl } from './layout'
+import Cookies from 'js-cookie'
 
 
 
@@ -36,7 +37,10 @@ export default function Home() {
         setDate(response.data.data)
       })
       .catch(function (error) {
-        console.log(error.response)
+        if (error.response.status === 401) {
+          Cookies.set("islogged", false)
+          window.location.reload()
+        }
       }
       );
   }

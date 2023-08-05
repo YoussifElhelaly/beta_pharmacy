@@ -12,6 +12,7 @@ import token from "../../../Atom/accessToken"
 import { BaseUrl } from "../layout"
 import openDetails from "../../../Atom/openDetails"
 import axios from "axios"
+import Cookies from "js-cookie"
 
 export default function Sales() {
 
@@ -40,6 +41,10 @@ export default function Sales() {
                 setData(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );

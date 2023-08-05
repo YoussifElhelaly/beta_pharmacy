@@ -8,6 +8,7 @@ import DetailsProduct from "../DetailsProduct/DetailsProduct";
 import searchIcon from '../../Img/searchIcon.png'
 import Image from "next/image";
 import { Skeleton } from "@mui/material";
+import Cookies from "js-cookie";
 
 
 function InventoryTable() {
@@ -39,6 +40,10 @@ function InventoryTable() {
                 setIsLoading(false)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
 
             }
@@ -60,6 +65,10 @@ function InventoryTable() {
                 setDate([response.data.data])
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error)
             }
             );

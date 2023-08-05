@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import token from "../../..//Atom/accessToken"
 import openDetails from "../../../Atom/openDetails"
 import DetailsId from "../../../Atom/DetailsId"
+import Cookies from "js-cookie"
 
 function DetailsSale() {
 
@@ -33,6 +34,10 @@ function DetailsSale() {
                 setData(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );
@@ -109,8 +114,8 @@ function DetailsSale() {
                             <>
                                 <div className="showData my-5 flex gap-5 justify-between odd:bg-[#EAEAEA] px-[50px] py-3">
                                     <div className="details flex gap-5">
-                                        <div className="img w-[190px] h-[170px] overflow-hidden">
-                                            <Image alt="addImg" className="object-cover" src={`${BaseUrl}${item.medicine.medicine_img}`} width={190} height={170}></Image>
+                                        <div className="img w-[190px] h-[170px] rounded-md overflow-hidden">
+                                            <Image alt="addImg" width={190} height={170} className="object-cover h-full w-full" src={`${BaseUrl}${item.medicine.medicine_img}`} ></Image>
                                         </div>
                                         <ul className='flex flex-col justify-between'>
                                             <li>{item.medicine.name}</li>

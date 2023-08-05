@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil"
 import token from "../../../Atom/accessToken"
 import { BaseUrl } from "@/app/layout"
 import { Skeleton } from "@mui/material"
+import Cookies from "js-cookie"
 
 function HomeBox(props) {
 
@@ -29,6 +30,10 @@ function HomeBox(props) {
                 setCurrentData(response.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );

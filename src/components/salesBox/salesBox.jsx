@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import token from "../../../Atom/accessToken";
 import { Skeleton } from "@mui/material";
+import Cookies from "js-cookie";
 
 function SalesBox() {
 
@@ -29,6 +30,10 @@ function SalesBox() {
                 setData(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );

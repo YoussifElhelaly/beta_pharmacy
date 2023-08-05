@@ -15,6 +15,7 @@ import ConfirmSale from '../confirmSale/confirmSale'
 import { ToastContainer, toast } from 'react-toastify'
 import confirmMed from '../../../Atom/confirmMed'
 import Warning from '../Warning/Warning'
+import Cookies from 'js-cookie'
 
 function CreateSale() {
     const [isCreateOpen, setIsCreateOpen] = useRecoilState(createOpen)
@@ -62,6 +63,10 @@ function CreateSale() {
                 setCurrentProduct(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error("لا يوجد منتج لهذا الكود")
             }
             );
@@ -97,6 +102,10 @@ function CreateSale() {
                 toast.success(response.data.message)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response.data.message)
                 if (error.response.data.message == "لا يوجد لائحة حذر لهذا المرض") {
                     toast.success("هذا الدواء مسموح به للمريض")
@@ -135,6 +144,10 @@ function CreateSale() {
 
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
 
             }
@@ -189,8 +202,8 @@ function CreateSale() {
                     currentProduct == null ? null :
                         <div className="showData my-5 flex gap-5 justify-between bg-[#EAEAEA] px-[50px] py-3">
                             <div className="details flex gap-5">
-                                <div className="img">
-                                    <Image alt='test-Img' src={`${BaseUrl}${currentProduct.medicine_img}`} width={300} height={300}></Image>
+                                <div className="img h-[168px] w-[187px] ">
+                                    <Image alt='test-Img' src={`${BaseUrl}${currentProduct.medicine_img}`} width={187} height={"168"}></Image>
                                     {console.log(`${BaseUrl}${currentProduct.medicine_img}`)}
                                 </div>
                                 <ul className='flex flex-col justify-between'>

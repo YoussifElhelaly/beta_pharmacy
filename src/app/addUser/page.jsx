@@ -12,6 +12,7 @@ import axios from "axios"
 import { BaseUrl } from "../layout"
 import { useRecoilValue } from "recoil"
 import { toast } from "react-toastify"
+import Cookies from "js-cookie"
 
 export default function AddUser() {
 
@@ -51,6 +52,10 @@ export default function AddUser() {
                 clearInp()
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error(error.response.data.message)
                 console.log(error.response)
             }

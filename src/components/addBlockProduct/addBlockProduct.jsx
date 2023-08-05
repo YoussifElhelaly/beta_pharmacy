@@ -14,6 +14,7 @@ import { BaseUrl } from '@/app/layout'
 import token from '../../../Atom/accessToken'
 import deleteIcon from '../../Img/deleteIcon.png'
 import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 
 function AddBlockProduct(props) {
@@ -53,6 +54,10 @@ function AddBlockProduct(props) {
                 toast.success("تم العثور علي الدواء")
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error(error.response.data.message)
             }
             );
@@ -77,6 +82,10 @@ function AddBlockProduct(props) {
                 toast.success(response.data.message)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error(error.response.data.message)
                 console.log(error.response)
             }
@@ -110,6 +119,10 @@ function AddBlockProduct(props) {
                 setListDisease(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error(error.response.data.message)
             }
             );

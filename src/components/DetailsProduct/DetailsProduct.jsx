@@ -16,8 +16,8 @@ function DetailsProduct(props) {
                 <Image alt='icon' onClick={() => setIsOpen(false)} src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                 <div className="showData my-5 flex gap-5 justify-between bg-[#EAEAEA] px-[50px] py-3">
                     <div className="details flex gap-5">
-                        <div className="img">
-                            <Image alt='test-Img' src={`${BaseUrl}${props.currentProduct.medicine_img}`} width={300} height={300}></Image>
+                        <div className="img w-[187px] h-[168px] rounded-md overflow-hidden">
+                            <Image alt='test-Img' className='object-cover' src={`${BaseUrl}${props.currentProduct.medicine_img}`} width={"187"} height={"168"}></Image>
 
                         </div>
                         <ul className='flex flex-col justify-between text-[#000] text-xl'>

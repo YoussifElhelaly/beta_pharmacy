@@ -34,10 +34,12 @@ export default function Login() {
                 console.log(response.data);
                 Cookies.set("islogged", true)
                 Cookies.set("accessToken", response.data.access)
+                Cookies.set("refreshToken", response.data.refresh)
                 setToken(response.data.access)
                 window.location.reload()
             })
             .catch(function (error) {
+                
                 console.log(error)
                 setIsLoading(false)
                 setError(true)

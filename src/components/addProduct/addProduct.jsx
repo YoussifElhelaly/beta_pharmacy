@@ -14,6 +14,7 @@ import token from '../../../Atom/accessToken'
 import { BaseUrl } from '@/app/layout'
 import { toast } from 'react-toastify'
 import ReactLoading from 'react-loading';
+import Cookies from 'js-cookie'
 
 
 
@@ -61,6 +62,10 @@ function AddProduct() {
 
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );
@@ -95,6 +100,10 @@ function AddProduct() {
                 emptyInputs()
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 setIsLoading(false)
                 toast.error(error.response.data.message)
             }

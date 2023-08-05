@@ -12,6 +12,7 @@ import { BaseUrl } from "../layout"
 import token from "../../../Atom/accessToken"
 import axios from "axios"
 import { toast } from "react-toastify"
+import Cookies from "js-cookie"
 
 
 export default function Block() {
@@ -41,6 +42,10 @@ export default function Block() {
                 setDate(response.data.data.medicine)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 toast.error(error.response.data.message)
             }
             );
@@ -71,6 +76,10 @@ export default function Block() {
                 setListDisease(response.data.data)
             })
             .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
                 console.log(error.response)
             }
             );
