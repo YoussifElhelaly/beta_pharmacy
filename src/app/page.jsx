@@ -47,6 +47,12 @@ export default function Home() {
     getMedicine()
   }, [])
 
+
+  if (Cookies.get("accessToken") == undefined) {
+    Cookies.set("islogged", false)
+    Cookies.set("accessToken", "")
+  }
+
   return (
     <Layout>
       <section className="home h-[calc(100vh-140px)]">
