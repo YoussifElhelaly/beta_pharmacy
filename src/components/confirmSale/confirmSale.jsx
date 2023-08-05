@@ -10,6 +10,11 @@ import WrongMessage from "../wrongMessage/wrongMessage"
 import token from "../../../Atom/accessToken"
 import createOpen from "../../../Atom/CreateOpen"
 import { toast } from "react-toastify"
+import ReactLoading from 'react-loading';
+
+
+
+
 function ConfirmSale(props) {
 
     const [isConfirmOpen, setIsConfirmOpen] = useRecoilState(confirmOpen)
@@ -22,6 +27,9 @@ function ConfirmSale(props) {
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
     const tokken = useRecoilValue(token)
+    const [isLoading, setIsLoading] = useState(false)
+
+
 
 
     function getSumQuan() {
@@ -57,10 +65,12 @@ function ConfirmSale(props) {
         let result = await axios.request(options)
             .then(function (response) {
                 toast.success(response.data.message)
+                setIsLoading(false)
                 setIsConfirmOpen(false)
                 setIsCreateOpen(false)
             })
             .catch(function (error) {
+                setIsLoading(false)
                 console.log(error)
                 toast.error("يوجد منتج في هذه المبيعة ليس متوفر  في المخزون الكمية المطلوبة  ")
             }
@@ -127,7 +137,18 @@ function ConfirmSale(props) {
                 <ul className="px-[50px]">
                     <li className="bg-secondary p-[25px] my-5 text-[#fff] rounded-md text-[20px]">إجمالي الكمية :  {`${getSumQuan()} units`}   </li>
                     <li className="bg-secondary p-[25px] my-5 text-[#fff] rounded-md text-[20px]">إجمالي السعر : {getSumPrice()} $</li>
-                    <button onClick={() => { createReq() }} className='bg-primary text-[#fff] w-full py-5 my-5 rounded-[10px]'>تأكيد مبيعة</button>
+                    <button onClick={() => {
+                        setIsLoading(true)
+                        createReq()
+                    }} className={`bg-primary text-[#fff] w-full py-5 my-5 rounded-[10px] ${isLoading ? "cursor-not-allowed" : null}`}>
+                        {
+                            isLoading ?
+                                <ReactLoading className="mx-auto" type="spin" width={30} height={30} /> :
+                                "تأكيد مبيعة"
+                        }
+
+
+                    </button>
                 </ul>
             </div>
         </div>

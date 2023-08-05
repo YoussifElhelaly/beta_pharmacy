@@ -1,4 +1,5 @@
 'use client'
+import './addBlockProduct.css'
 import barcodeIcon from '../../Img/barcodeIcon.png'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'

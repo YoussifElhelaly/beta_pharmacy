@@ -7,11 +7,10 @@ import passIcon from "../../Img/lockIcon.png"
 import { useRef, useState } from "react"
 import Cookies from "js-cookie"
 import axios from "axios"
-import { useRouter } from "next/router"
 import token from "../../../Atom/accessToken"
 import { useRecoilState } from "recoil"
 import WrongMessage from "../../components/wrongMessage/wrongMessage"
-import jwt_decode from "jwt-decode";
+import ReactLoading from 'react-loading';
 
 export default function Login() {
 
@@ -22,7 +21,7 @@ export default function Login() {
     const [error, setError] = useState(false)
     const [message, setMessage] = useState(false)
     const [accessToken, setToken] = useRecoilState(token)
-
+    const [isLoading, setIsLoading] = useState(false)
     async function login(email, pass) {
         console.log(email)
         console.log(pass)
@@ -40,6 +39,7 @@ export default function Login() {
             })
             .catch(function (error) {
                 console.log(error)
+                setIsLoading(false)
                 setError(true)
                 setMessage(error.response.data.message)
             });
@@ -54,10 +54,10 @@ export default function Login() {
     }
 
     return (
-        <section className="signup bg-bgPrimary h-[100vh]">
+        <section className="signup bg-bgPrimary h-[calc(100vh-50px)]">
             <div className="container h-full">
                 <div className="grid grid-cols-2 max-[767px]:grid-cols-1 gap-4 h-full items-center">
-                    <div className="form w-[70%] z-50 max-[992px]:w-full mx-auto relative z-1">
+                    <div className=" w-[70%] z-50 max-[992px]:w-full mx-auto relative z-1">
                         <h1 className="text-primary text-center text-[40px] font-semibold">Alarm</h1>
                         <p className="text-center text-[40px] font-bold">مرحبا بعودتك</p>
                         <div className="input flex flex-col my-3">
@@ -81,8 +81,21 @@ export default function Login() {
                             <a href="#" className="inline-block text-center text-primary mt-4">  أعادة تعيين كلمة المرور</a>
                         </div>
                         <button onClick={() => {
+                            setIsLoading(true)
                             HandleInput()
-                        }} className="w-full p-4 rounded-[10px] bg-primary my-5 text-[#fff] text-[22px] font-semibold">تسجيل الدخول</button>
+                        }} className={`w-full ${isLoading ? "cursor-not-allowed" : null} p-4 rounded-[10px] bg-primary my-5 text-[#fff] text-[22px] font-semibold`}
+                            disabled={isLoading}
+                        >
+                            {
+                                isLoading ?
+                                    <ReactLoading className="mx-auto" type="spin" width={30} height={30} />
+                                    :
+                                    "تسجيل الدخول"
+
+                            }
+
+
+                        </button>
                         <p className="text-center">ليس لديك حساب؟ <a href="#" className="text-primary">انشاء حساب</a></p>
                     </div>
                     <div className="img max-[767px]:absolute max-[767px]:opacity-[0.1]">

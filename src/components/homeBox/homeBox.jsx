@@ -3,12 +3,15 @@ import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
 import token from "../../../Atom/accessToken"
 import { BaseUrl } from "@/app/layout"
+import { Skeleton } from "@mui/material"
 
 function HomeBox(props) {
 
     const [date, setDate] = useState(false)
     const [currentData, setCurrentData] = useState([])
     const accessToken = useRecoilValue(token)
+    const [isLoading, setisLoading] = useState(true)
+
 
     async function getData() {
         const options = {
@@ -22,6 +25,7 @@ function HomeBox(props) {
         let result = await axios.request(options)
             .then(function (response) {
                 console.log(response)
+                setisLoading(false)
                 setCurrentData(response.data)
             })
             .catch(function (error) {
@@ -39,12 +43,20 @@ function HomeBox(props) {
     return (
         <div className="homeBox flex flex-col justify-between bg-bgPrimary rounded-[30px] max-h-[210px] w-[calc(33.33%-27px)] px-5 py-3">
             <div className="boxTop flex justify-between items-center">
-                <h3 className="font-semibold"> {props.title} </h3>
+                <h3 className="font-semibold">
+
+                    {props.title}
+
+                </h3>
                 <i className={`fa-solid fa-cart-shopping bg${props.secondry} p-4 rounded-full text${props.primary}`}></i>
             </div>
             <div className="boxBody text-center" dir="ltr">
-                <p className="text-[50px] font-semibold">
-                    {props.type === "sales" ? currentData.profits : currentData.sales_count}
+                <p className="text-[50px] font-semibold ">
+                    {
+                        isLoading ? <Skeleton className="rounded-md mx-auto" variant="rectangular" width={100} height={60} /> :
+                            (props.type === "sales" ? currentData.profits : currentData.sales_count)
+
+                    }
 
 
                 </p>

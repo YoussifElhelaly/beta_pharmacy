@@ -3,10 +3,13 @@ import { useRecoilValue } from "recoil";
 import token from "../../../Atom/accessToken";
 import { BaseUrl } from "@/app/layout";
 import axios from "axios";
+import { Skeleton } from "@mui/material";
 
 function ExpiredBox() {
     const [data, setData] = useState([])
     const accessToken = useRecoilValue(token)
+    const [isLoading, setisLoading] = useState(true)
+
 
     async function getData() {
         const options = {
@@ -20,6 +23,7 @@ function ExpiredBox() {
         let result = await axios.request(options)
             .then(function (response) {
                 console.log(response)
+                setisLoading(false)
                 setData(response.data.data)
             })
             .catch(function (error) {
@@ -37,15 +41,23 @@ function ExpiredBox() {
             <div className="details">
                 <ul className="w-[100%]">
                     {
-                        data?.map((product, index) => {
-                            return (
-                                <li key={index} className="flex my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">
-                                    <span className="w-[30%]">{product.exp_date}</span>
-                                    <span className="w-[30%] text-center" dir="ltr">{product.stock} units</span>
-                                    <p className="w-[30%] text-left">{product.name}</p></li>
+                        isLoading ?
+                            <div className="skeletonContainer">
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                            </div>
+                            :
+                            data?.map((product, index) => {
+                                return (
+                                    <li key={index} className="flex my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">
+                                        <span className="w-[30%]">{product.exp_date}</span>
+                                        <span className="w-[30%] text-center" dir="ltr">{product.stock} units</span>
+                                        <p className="w-[30%] text-left">{product.name}</p></li>
 
-                            )
-                        })
+                                )
+                            })
                     }
                 </ul>
             </div>

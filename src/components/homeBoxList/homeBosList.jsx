@@ -1,6 +1,10 @@
+import { Skeleton } from "@mui/material"
+import { useState } from "react"
 
 function HomeBoxList(props) {
     let data = props.data?.slice(0, 3)
+    const isLoading = props.loading
+
 
 
     return (
@@ -10,11 +14,22 @@ function HomeBoxList(props) {
             </div>
             <div className="boxBody text-center" dir="ltr">
                 <ul>
-                    {data?.map((product) => {
-                        return (
-                            <li key={product.id} className={`flex my-2 justify-between bg${props.secondry} text-[15px] px-2 py-1 rounded-md`}><h4>{product.name}</h4><p>{product.stock} units</p></li>
-                        )
-                    })}
+                    {
+                        isLoading ?
+                            <div className="skeletonContainer">
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                            </div>
+                            :
+                            data?.map((product) => {
+                                return (
+                                    <li key={product.id} className={`flex my-2 justify-between bg${props.secondry} text-[15px] px-2 py-1 rounded-md`}><h4>{product.name}</h4><p>{product.stock} units</p></li>
+                                )
+                            })
+                    }
+
+
                 </ul>
             </div>
         </div>

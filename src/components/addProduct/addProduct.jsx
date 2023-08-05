@@ -9,12 +9,12 @@ import AddCate from '../addCategory/addCate'
 import addIcon from '../../Img/addIcon.png'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import categoryOpen from '../../../Atom/CategoryOpen'
-import SuccessMessage from '../successMessage/successMessage'
-import WrongMessage from '../wrongMessage/wrongMessage'
 import productOpen from '../../../Atom/productOpen'
 import token from '../../../Atom/accessToken'
 import { BaseUrl } from '@/app/layout'
 import { toast } from 'react-toastify'
+import ReactLoading from 'react-loading';
+
 
 
 function AddProduct() {
@@ -22,9 +22,6 @@ function AddProduct() {
     const file = useRef(null)
     const [isProductOpen, setIsProductOpen] = useRecoilState(productOpen)
     const [isAddOpen, setIsAddOpen] = useRecoilState(categoryOpen)
-    const [message, setMessage] = useState("")
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
     const nameInp = useRef()
     const codeInp = useRef()
     const priceInp = useRef()
@@ -33,6 +30,7 @@ function AddProduct() {
     const expireInp = useRef()
     const date = new Date()
     const today = date.toLocaleDateString()
+    const [isLoading, setIsLoading] = useState(false)
 
     function emptyInputs() {
         nameInp.current.value = null
@@ -69,14 +67,13 @@ function AddProduct() {
     }, [isAddOpen])
 
     async function uploadImg() {
-
         let formData = new FormData()
         formData.append("name", nameInp.current.value)
         formData.append("price", priceInp.current.value)
         formData.append("category", categoryInp.current.value)
         formData.append("prodDate", today.split("/").reverse().join("-"))
         formData.append("expDate", expireInp.current.value)
-        formData.append("medicineImg", file.current.files[0])
+        formData.append("medicineImg", file.current.files[0] == undefined ? "" : file.current.files[0])
         formData.append("stock", quanInp.current.value)
         formData.append("stockWarnLimit", 3)
         formData.append("barCode", codeInp.current.value)
@@ -93,10 +90,12 @@ function AddProduct() {
         }
         let result = await axios.request(options)
             .then(function (response) {
+                setIsLoading(false)
                 toast.success(response.data.message)
                 emptyInputs()
             })
             .catch(function (error) {
+                setIsLoading(false)
                 toast.error(error.response.data.message)
             }
             );
@@ -163,10 +162,18 @@ function AddProduct() {
                     </div>
                 </div>
 
-                <button onClick={() => {
+                <button disabled={isLoading} onClick={() => {
+                    setIsLoading(true)
                     uploadImg()
 
-                }} className='bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px]'>حفظ المنتج</button>
+                }} className={`bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px] ${isLoading ? "cursor-not-allowed" : null}`}>
+                    {
+                        isLoading ?
+                            <ReactLoading className="mx-auto" type="spin" width={30} height={30} /> :
+                            " حفظ المنتج"
+                    }
+
+                </button>
             </div>
             {
                 isAddOpen ? <AddCate title="category" /> : null

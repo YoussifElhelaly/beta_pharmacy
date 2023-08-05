@@ -10,7 +10,6 @@ import token from '../../Atom/accessToken'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BaseUrl } from './layout'
-import Cookies from 'js-cookie'
 
 
 
@@ -19,10 +18,7 @@ export default function Home() {
 
   const [accessToken, setToken] = useRecoilState(token)
   const [data, setDate] = useState([])
-
-  if (Cookies.get("islogged") == undefined) {
-    Cookies.set('islogged', false)
-  }
+  const [isLoading, setisLoading] = useState(true)
 
   async function getMedicine() {
     const options = {
@@ -36,6 +32,7 @@ export default function Home() {
     let result = await axios.request(options)
       .then(function (response) {
         console.log(response.data.data);
+        setisLoading(false)
         setDate(response.data.data)
       })
       .catch(function (error) {
@@ -59,8 +56,8 @@ export default function Home() {
           <HomeBox type="sales" primary="Red" secondry="RedLow" title="اجمالي الطلابات" />
           <HomeBox primary="Vilot" secondry="VilotLow" />
           <HomeBox primary="Vilot" secondry="VilotLow" />
-          <HomeBoxList secondry="GreenLow" data={data} name=" الدواء المضاف حديثا" />
-          <HomeBoxList secondry="RedLow" data={data} name="دواء تم حظرة بموجب لائحة طبية" />
+          <HomeBoxList loading={isLoading} secondry="GreenLow" data={data} name=" الدواء المضاف حديثا" />
+          <HomeBoxList loading={isLoading} secondry="RedLow" data={data} name="دواء تم حظرة بموجب لائحة طبية" />
         </div>
         <div className="infoWrapper flex justify-between mt-10">
           <SalesBox />

@@ -22,6 +22,8 @@ export default function Sales() {
     const tokken = useRecoilValue(token)
     const [isDetailsOpen, setIsDetailsOpen] = useRecoilState(openDetails)
     const [detailsId, setDestailsId] = useState()
+    const [isLoading, setIsLoading] = useState(true)
+
     async function getProduct() {
         const options = {
             method: 'GET',
@@ -34,6 +36,7 @@ export default function Sales() {
         let result = await axios.request(options)
             .then(function (response) {
                 console.log(response.data.data)
+                setIsLoading(false)
                 setData(response.data.data)
             })
             .catch(function (error) {
@@ -44,7 +47,7 @@ export default function Sales() {
 
     useEffect(() => {
         getProduct()
-    },[])
+    }, [])
 
     return (
         <Layout>
@@ -53,7 +56,7 @@ export default function Sales() {
             </div>
             <div className="tableDetails bg-bgPrimary p-5 mt-5 rounded-[30px]" >
                 <h3 className="text-xl mb-5">إجمالي المبيعات</h3>
-                <SalesTable data={data} />
+                <SalesTable loading={isLoading} data={data} />
             </div>
             {
                 isCreateOpen ? <CreateSale /> : null
