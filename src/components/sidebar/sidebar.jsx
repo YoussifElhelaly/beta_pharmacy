@@ -7,17 +7,20 @@ import inventoryIcon from '../../Img/inventoryIcon.png'
 import addUserIcon from '../../Img/addUserIcon.png'
 import exitIcon from '../../Img/exitIcon.png'
 import homeIcon from '../../Img/homeIcon.png'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-// import { useRouter } from 'next/router'
 
 
 
 
 function Sidebar() {
     const pathName = usePathname();
+    const url = useRouter()
+
+    console.log(pathName)
+    console.log(window.location.origin)
+
 
     return (
         <div className="sidebar sticky top-[25px] h-[100%] bg-bgPrimary rounded-[70px] w-[100%]">
@@ -25,7 +28,7 @@ function Sidebar() {
                 <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2>
                 <li className={` ${pathName === "/" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     <Image className='ml-5' src={homeIcon} alt='icon'></Image>
-                    <Link className=" block w-full " href="../../../">Home</Link>
+                    <Link className=" block w-full " href="../../../">الرئيسية</Link>
                 </li>
                 <li className={` ${pathName === "/sales" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     {/* <Image className='ml-5' src={checkIcon} alt='icon'></Image> */}

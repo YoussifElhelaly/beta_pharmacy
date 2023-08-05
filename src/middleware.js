@@ -10,21 +10,21 @@ export default function middleware(req) {
 
 
     if (url.pathname == ("/login") && cookie?.value == "true") {
-        return NextResponse.redirect("http://localhost:3000/")
+        return NextResponse.redirect(`${url.origin}`)
     }
     if ((cookie?.value == "false") && url.pathname == ("/")) {
-        return NextResponse.redirect("http://localhost:3000/login")
+        return NextResponse.redirect(`${url.origin}/login`)
     }
     if ((cookie?.value == "false") && url.pathname == ("/sales")) {
-        return NextResponse.redirect("http://localhost:3000/login")
+        return NextResponse.redirect(`${url.origin}/login`)
     }
     if ((cookie?.value == "false") && url.pathname == ("/inventory")) {
-        return NextResponse.redirect("http://localhost:3000/login")
+        return NextResponse.redirect(`${url.origin}/login`)
     }
     if ((cookie?.value == "false") && url.pathname == ("/block")) {
-        return NextResponse.redirect("http://localhost:3000/login")
+        return NextResponse.redirect(`${url.origin}/login`)
     }
     if ((cookie?.value == "false") && url.pathname == ("/addUser")) {
-        return NextResponse.redirect("http://localhost:3000/login")
+        return NextResponse.redirect(`${url.origin}3000/login`)
     }
 }
