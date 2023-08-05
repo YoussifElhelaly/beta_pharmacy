@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import checkIcon from '../../Img/check icon.png'
+import checkIcon from '../../Img/checkIcon.png'
 import blockIcon from '../../Img/blockIcon.png'
 import inventoryIcon from '../../Img/inventoryIcon.png'
 import addUserIcon from '../../Img/addUserIcon.png'
