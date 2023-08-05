@@ -106,7 +106,7 @@ function CreateSale() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response.data.message)
+                console.log(error)
                 if (error.response.data.message == "لا يوجد لائحة حذر لهذا المرض") {
                     toast.success("هذا الدواء مسموح به للمريض")
                     setSaleList((old) => [
@@ -160,11 +160,11 @@ function CreateSale() {
 
     useEffect(() => {
         getDeas()
-    })
+    },[])
 
     return (
 
-        <div className="createSale bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="createSale z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary w-[1150px] ">
                 <Image alt='icon' onClick={() => setIsCreateOpen(false)} src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                 <div className=' form px-[50px]'>

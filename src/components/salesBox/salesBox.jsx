@@ -58,7 +58,7 @@ function SalesBox() {
                             :
                             data?.map((product, index) => {
                                 return (
-                                    <li key={index} className="flex my-2 justify-between bg-[#CCECC9] px-2 py-1 rounded-md"><p dir="ltr">{product.solds_count} units</p><h5>{product.name}</h5></li>
+                                    <li key={index} className="flex my-2 items-center justify-between bg-[#CCECC9] px-2 py-1 rounded-md"><p dir="ltr">{product.solds_count} units</p><h5>{product.name}</h5></li>
 
                                 )
                             })

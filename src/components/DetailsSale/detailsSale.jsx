@@ -70,8 +70,8 @@ function DetailsSale() {
     })
 
     return (
-        <div className="detailsSale bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
-            <div className="relative max-h-[860px] overflow-y-scroll rounded-[15px] py-[50px] bg-bgPrimary w-[1150px] ">
+        <div className="detailsSale z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+            <div className="relative max-h-[80%] overflow-y-scroll rounded-[15px] py-[50px] bg-bgPrimary w-[1150px] ">
                 <Image onClick={() => { setisOpen(false) }} alt="icon" src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                 <div className='form px-[50px]'>
                     <div className=" flex gap-5 mb-5">
@@ -112,7 +112,7 @@ function DetailsSale() {
                     data?.sold_items.map((item) => {
                         return (
                             <>
-                                <div className="showData my-5 flex gap-5 justify-between odd:bg-[#EAEAEA] px-[50px] py-3">
+                                <div className=" showData my-5 flex gap-5 justify-between odd:bg-[#EAEAEA] px-[50px] py-3">
                                     <div className="details flex gap-5">
                                         <div className="img w-[190px] h-[170px] rounded-md overflow-hidden">
                                             <Image alt="addImg" width={190} height={170} className="object-cover h-full w-full" src={`${BaseUrl}${item.medicine.medicine_img}`} ></Image>

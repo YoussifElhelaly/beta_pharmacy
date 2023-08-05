@@ -46,7 +46,7 @@ function HomeBox(props) {
     console.log(date)
 
     return (
-        <div className="homeBox flex flex-col justify-between bg-bgPrimary rounded-[30px] max-h-[210px] w-[calc(33.33%-27px)] px-5 py-3">
+        <div className="homeBox flex flex-col justify-between bg-bgPrimary rounded-[30px] h-[210px] w-[calc(33.33%-27px)] px-5 py-3">
             <div className="boxTop flex justify-between items-center">
                 <h3 className="font-semibold">
 

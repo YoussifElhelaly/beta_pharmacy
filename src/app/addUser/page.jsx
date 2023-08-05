@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import signupIMG from '../../Img/signup.png'
-// import UserIcon from "../../Img/UserIcon.png"
+import UserIcon from "../../Img/UserIcon.png"
 import emailIcon from "../../Img/envelopeIcon.png"
 import passIcon from "../../Img/lockIcon.png"
 import { useRef } from "react"
@@ -70,13 +70,13 @@ export default function AddUser() {
                         <div className="img max-[767px]:absolute max-[767px]:opacity-[0.1]">
                             <Image src={signupIMG} alt="signup image"></Image>
                         </div>
-                        <div className="form w-[70%] max-[992px]:w-full mx-auto relative z-1">
+                        <div className=" w-[70%] max-[992px]:w-full mx-auto relative z-1">
                             <h1 className="text-primary text-center text-[40px] font-semibold">Alarm</h1>
                             <p className="text-center text-[40px] font-bold">مرحبا بك !</p>
                             <div className="input flex flex-col my-3">
                                 <label htmlFor="UserName">اسم المستخدم</label>
                                 <div className="inputBox flex bg-[#fff] items-center rounded-[10px] shadow-sm">
-                                    {/* <Image alt="icon" className="w-[20px] m-[10px] h-[20px]" src={UserIcon}></Image> */}
+                                    <Image alt="icon" className="w-[20px] m-[10px] h-[20px]" src={UserIcon}></Image>
                                     <input ref={userNameInp} type="text" id="UserName" name="userName" className="rounded-[10px] p-[20px] w-full focus-visible:outline-none " placeholder="اسم المستخدم" />
                                 </div>
                             </div>

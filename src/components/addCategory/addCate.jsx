@@ -42,6 +42,7 @@ function AddCate(props) {
         let result = await axios.request(options)
             .then(function (response) {
                 toast.success(response.data.message)
+                setIsAddOpen(false)
             })
             .catch(function (error) {
                 if (error.response.status === 401) {

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import BackIcon from '../../Img/BackIcon.png'
 import barcodeIcon from '../../Img/barcodeIcon.png'
 import addImage from '../../Img/test.png'
-import './addProduct.css'
+import './updateProduct.css'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import AddCate from '../addCategory/addCate'
@@ -15,10 +15,11 @@ import { BaseUrl } from '@/app/layout'
 import { toast } from 'react-toastify'
 import ReactLoading from 'react-loading';
 import Cookies from 'js-cookie'
+import editOpen from '../../../Atom/editOpen'
 
 
 
-function AddProduct() {
+function UpdateProduct(props) {
 
     const file = useRef(null)
     const [isProductOpen, setIsProductOpen] = useRecoilState(productOpen)
@@ -32,6 +33,7 @@ function AddProduct() {
     const date = new Date()
     const today = date.toLocaleDateString()
     const [isLoading, setIsLoading] = useState(false)
+    const [isEdit, setIsEdit] = useRecoilState(editOpen)
 
     function emptyInputs() {
         nameInp.current.value = null
@@ -71,7 +73,7 @@ function AddProduct() {
             );
     }, [isAddOpen])
 
-    async function uploadImg() {
+    async function uploadImg(id) {
         let formData = new FormData()
         formData.append("name", nameInp.current.value)
         formData.append("price", priceInp.current.value)
@@ -84,8 +86,8 @@ function AddProduct() {
         formData.append("barCode", codeInp.current.value)
 
         const options = {
-            method: 'POST',
-            url: `${BaseUrl}/medicine/create/`,
+            method: 'PUT',
+            url: `${BaseUrl}/medicine/update/${id}/`,
             data: formData
             ,
             headers: {
@@ -110,15 +112,15 @@ function AddProduct() {
             );
     }
     return (
-        <div className="addProduct  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="addProduct text-[#000]  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary h-full xl:h-fit w-[1150px] px-[50px]">
                 <div className="flex justify-between">
-                    <Image alt="icon" src={BackIcon} onClick={() => setIsProductOpen(false)} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
+                    <Image alt="icon" src={BackIcon} onClick={() => setIsEdit(false)} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                     <div className="addImage w-[390px] flex justify-center items-center flex-col">
                         <h4 className='text-[20px] mb-2'>اضافة صور المنتج</h4>
                         <div className="img relative">
                             <input type="file" ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
-                            <Image alt='icon' src={addImage} className='h-[350px] w-[390px]'></Image>
+                            <Image alt='icon' src={`${BaseUrl}${props.edit.medicine_img}`} width={390} height={350}></Image>
                         </div>
                     </div>
                     <div className='form w-1/2'>
@@ -127,22 +129,22 @@ function AddProduct() {
                             <div className='relative'>
                                 <Image alt='icon' src={barcodeIcon} className='absolute right-[10px] top-[50%] translate-y-[-50%]'></Image>
 
-                                <input ref={codeInp} type="number" />
+                                <input ref={codeInp} disabled Value={props.edit.bar_code} type="number" />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">
                             <label htmlFor="">أسم المنتج</label>
-                            <input ref={nameInp} type="text" />
+                            <input ref={nameInp} type="text" defaultValue={props.edit.name} />
                         </div>
                         <div className="input py-2 flex flex-col relative items-end w-full">
                             <label htmlFor="">الفئات
                             </label>
                             <Image alt='icon' src={addIcon} onClick={() => setIsAddOpen(true)} className=' cursor-pointer absolute bottom-[25px] right-[-50px]'></Image>
-                            <select ref={categoryInp}>
+                            <select ref={categoryInp} defaultValue={props.edit.category}>
                                 {
                                     data.map((product, index) => {
                                         return (
-                                            <option key={index}> {product.name}</option>
+                                            <option key={index} value={product.id} selected={product.id === props.edit.category ? true : false}> {product.name}</option>
 
                                         )
                                     })
@@ -154,26 +156,26 @@ function AddProduct() {
                             <label htmlFor="">الكمية</label>
                             <div className="quan w-full">
 
-                                <input ref={quanInp} type="number" />
+                                <input ref={quanInp} type="number" defaultValue={props.edit.stock} />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">
                             <label htmlFor="">السعر</label>
                             <div className="price w-full">
 
-                                <input ref={priceInp} type="number" />
+                                <input ref={priceInp} type="number" defaultValue={props.edit.price} />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">
                             <label htmlFor="">تاريخ انتهاء الصلاحية</label>
-                            <input ref={expireInp} type="date" />
+                            <input ref={expireInp} type="date" defaultValue={props.edit.exp_date} />
                         </div>
                     </div>
                 </div>
 
                 <button disabled={isLoading} onClick={() => {
                     setIsLoading(true)
-                    uploadImg()
+                    uploadImg(props.edit.id)
 
                 }} className={`bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px] ${isLoading ? "cursor-not-allowed" : null}`}>
                     {
@@ -188,8 +190,8 @@ function AddProduct() {
                 isAddOpen ? <AddCate title="category" /> : null
             }
 
-        </div>
+        </div >
     )
 }
 
-export default AddProduct
+export default UpdateProduct

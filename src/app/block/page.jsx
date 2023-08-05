@@ -28,13 +28,21 @@ export default function Block() {
 
     async function getData(id) {
 
+        let url
+        if (currentPage == true) {
+            url = `${BaseUrl}/banlist/get/${id}/`
+        }
+        if (currentPage == false) {
+            url = `${BaseUrl}/dangerlist/get/${id}/`
+
+        }
+
         const options = {
             method: 'GET',
             url: `${BaseUrl}/banlist/get/${id}/`,
             headers: {
                 "Authorization": `Bearer ${tokken}`
             },
-
         }
         let result = axios.request(options)
             .then(function (response) {
@@ -83,18 +91,18 @@ export default function Block() {
                 console.log(error.response)
             }
             );
-    }, [currentPage])
+    }, [currentPage, addOpen])
 
 
     return (
         <Layout>
             <ul className="flex gap-5">
-                <li onClick={() => { setCureentPage(true) }} className={`text-[20px] font-semibold ${currentPage ? "text-vilot border-b-2" : ""} `}>قائمة الامراض </li>
-                <li onClick={() => { setCureentPage(false) }} className={`text-[20px] font-semibold ${currentPage ? "" : "text-vilot border-b-2"} `}>قائمة محظورات اللوائح الطبية</li>
+                <li onClick={() => { setCureentPage(true) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "text-vilot border-b-2" : ""} `}>قائمة الامراض </li>
+                <li onClick={() => { setCureentPage(false) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "" : "text-vilot border-b-2"} `}>قائمة محظورات اللوائح الطبية</li>
             </ul>
             <div className="tableDetails bg-bgPrimary pt-5 mt-5 rounded-xl text-[20px] text-[#fff]" >
 
-                <div className="input relative text-[#000] flex flex-col items-end ms-auto w-fit">
+                <div className="input mx-10 mb-10 relative text-[#000] flex flex-col items-end ms-auto w-fit">
                     <label htmlFor="">{
                         currentPage ? "المرض" : "الفئة"
                     }
@@ -115,9 +123,10 @@ export default function Block() {
                 <div className="products bg-[#373854] flex flex-wrap rounded-3xl p-10 gap-10 justify-between">
                     {
                         date?.map((product, index) => {
+                            console.log(product)
                             return (
                                 <div key={index} className="product bg-[#282945] rounded-xl flex gap-5 items-center w-full p-3 2xl:w-[48%]">
-                                    <Image src={testImg} alt="medicine image"></Image>
+                                    <Image src={`${BaseUrl}${product.medicine_img}`} alt="medicine image" width={142} height={148}></Image>
                                     <div className="details">
                                         <ul>
                                             <li>{product.name}</li>

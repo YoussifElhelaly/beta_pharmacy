@@ -80,6 +80,7 @@ function AddBlockProduct(props) {
             .then(function (response) {
                 console.log(response)
                 toast.success(response.data.message)
+                setAddOpenBlock(false)
             })
             .catch(function (error) {
                 if (error.response.status === 401) {

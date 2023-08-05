@@ -74,7 +74,7 @@ function InventoryTable() {
             );
     }
 
-    useEffect(() => { uploadImg() })
+    useEffect(() => { uploadImg() }, [])
 
     return (
         <>

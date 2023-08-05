@@ -4,14 +4,18 @@ import BackIcon from '../../Img/BackIcon.png'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { BaseUrl } from '@/app/layout'
 import DetailsProductOpen from '../../../Atom/DetailsProductOpen'
+import AddProduct from '../addProduct/addProduct'
+import editOpen from '../../../Atom/editOpen'
+import UpdateProduct from '../updateProduct/updateProduct'
 
 function DetailsProduct(props) {
 
     const [isOpen, setIsOpen] = useRecoilState(DetailsProductOpen)
+    const [isEdit, setIsEdit] = useRecoilState(editOpen)
 
     return (
 
-        <div className="createSale bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="createSale  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary w-[1150px] ">
                 <Image alt='icon' onClick={() => setIsOpen(false)} src={BackIcon} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
                 <div className="showData my-5 flex gap-5 justify-between bg-[#EAEAEA] px-[50px] py-3">
@@ -34,10 +38,15 @@ function DetailsProduct(props) {
 
                 </div>
                 <button onClick={() => {
-                    uploadImg()
+                    setIsEdit(true)
+                }} className='bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px]'> تعديل علي المنتج</button>
 
-                }} className='bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px]'>حفظ المنتج</button>
             </div>
+            {
+                isEdit ?
+                    <UpdateProduct edit={props.currentProduct} isEdit={isEdit} />
+                    : null
+            }
         </div >
     )
 

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-// import checkIcon from '../../../Img/check icon.png'
+import checkIcon from '../../Img/check icon.png'
 import blockIcon from '../../Img/blockIcon.png'
 import inventoryIcon from '../../Img/inventoryIcon.png'
 import addUserIcon from '../../Img/addUserIcon.png'
@@ -48,7 +48,7 @@ function Sidebar() {
 
 
     return (
-        <div className="sidebar sticky top-[25px] h-[100%] bg-bgPrimary rounded-[70px] w-[100%]">
+        <div className="sidebar fixed top-[25px] w-fit h-[100%] bg-bgPrimary rounded-[70px] w-[100%]">
             <ul className="flex justify-around h-full flex-col py-[50px] text-2xl 2xl:text-[28px]">
                 <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2>
                 <li className={` ${pathName === "/" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
@@ -56,7 +56,7 @@ function Sidebar() {
                     <Link className=" block w-full " href="../../../">الرئيسية</Link>
                 </li>
                 <li className={` ${pathName === "/sales" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
-                    {/* <Image className='ml-5' src={checkIcon} alt='icon'></Image> */}
+                    <Image className='ml-5' src={checkIcon} alt='icon'></Image>
                     <Link className=" block w-full " href="../sales">المبيعات</Link>
                 </li>
                 <li className={` ${pathName === "/inventory" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>

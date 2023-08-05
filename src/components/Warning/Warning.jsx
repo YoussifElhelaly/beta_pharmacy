@@ -7,7 +7,7 @@ function Warning(props) {
     const confirm = false
 
     return (
-        <div className="detailsSale bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="detailsSale bg-[#5f6076d2] z-50 left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative bg-bgPrimary rounded-2xl overflow-hidden w-[560px] ">
                 <div className="icon bg-red p-[50px] shadow-xl">
                     <Image alt="icon" src={warningIcon} className="m-auto w-[150px]"></Image>
