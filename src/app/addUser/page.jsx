@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import signupIMG from '../../Img/signup.png'
-import UserIcon from "../../Img/UserIcon.png"
+import UserIcon from "../../Img/user.png"
 import emailIcon from "../../Img/envelopeIcon.png"
 import passIcon from "../../Img/lockIcon.png"
 import { useRef } from "react"
