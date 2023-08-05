@@ -25,7 +25,7 @@ function Sidebar() {
                 <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2>
                 <li className={` ${pathName === "/" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     <Image className='ml-5' src={homeIcon} alt='icon'></Image>
-                    <Link className=" block w-full " href="../../../">الرئيسية</Link>
+                    <Link className=" block w-full " href="../../../">Home</Link>
                 </li>
                 <li className={` ${pathName === "/sales" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     {/* <Image className='ml-5' src={checkIcon} alt='icon'></Image> */}
