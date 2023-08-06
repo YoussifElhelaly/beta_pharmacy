@@ -34,14 +34,14 @@ function Sidebar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+              
                 Cookies.set("islogged", false)
                 Cookies.set("accessToken", "")
                 Cookies.set("refreshToken", "")
                 window.location.reload()
             })
             .catch(function (error) {
-                console.log(error)
+               
             });
 
     }

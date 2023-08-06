@@ -71,7 +71,6 @@ function ConfirmSale(props) {
             })
             .catch(function (error) {
                 setIsLoading(false)
-                console.log(error)
                 toast.error("يوجد منتج في هذه المبيعة ليس متوفر  في المخزون الكمية المطلوبة  ")
             }
 

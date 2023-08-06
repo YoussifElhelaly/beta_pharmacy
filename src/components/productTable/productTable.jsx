@@ -10,6 +10,7 @@ import searchIcon from '../../Img/searchIcon.png'
 import Image from "next/image";
 import { Skeleton } from "@mui/material";
 import Cookies from "js-cookie";
+import editOpen from "../../../Atom/editOpen";
 
 
 function ProductTable() {
@@ -20,9 +21,8 @@ function ProductTable() {
     const [isOpen, setIsOpen] = useRecoilState(DetailsProductOpen)
     const searchInp = useRef()
     const [isLoading, setIsLoading] = useState(true)
+    const isEdit = useRecoilValue(editOpen)
 
-
-    console.log(data)
 
 
     async function uploadImg() {
@@ -36,7 +36,6 @@ function ProductTable() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response.data.data);
                 setIsLoading(false)
                 setDate(response.data.data)
             })
@@ -45,7 +44,6 @@ function ProductTable() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
             }
             );
     }
@@ -60,7 +58,6 @@ function ProductTable() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
                 setIsLoading(false)
                 setDate([response.data.data])
             })
@@ -69,12 +66,11 @@ function ProductTable() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error)
             }
             );
     }
 
-    useEffect(() => { uploadImg() }, [isProductOpen])
+    useEffect(() => { uploadImg() }, [isProductOpen, isEdit])
 
     return (
         <>

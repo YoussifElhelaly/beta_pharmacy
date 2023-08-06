@@ -31,7 +31,7 @@ function HomeBox(props) {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+                
                 setisLoading(false)
                 setCurrentData(response.data)
             })
@@ -40,7 +40,7 @@ function HomeBox(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
+                
             }
             );
     }
@@ -49,7 +49,6 @@ function HomeBox(props) {
         getData()
     }, [date])
 
-    console.log(date)
 
     return (
         <div className="homeBox flex flex-col justify-between bg-bgPrimary rounded-[30px] h-[210px] w-[calc(33.33%-27px)] px-5 py-3">

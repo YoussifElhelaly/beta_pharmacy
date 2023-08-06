@@ -25,7 +25,7 @@ function SalesBox() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+               
                 setisLoading(false)
                 setData(response.data.data)
             })
@@ -34,7 +34,7 @@ function SalesBox() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
+               
             }
             );
     }
@@ -43,7 +43,7 @@ function SalesBox() {
     }, [])
 
     return (
-        <div className="exipredBox bg-bgPrimary w-[49%] p-5 rounded-3xl">
+        <div className="exipredBox bg-bgPrimary w-[49%] p-5 rounded-3xl h-[calc(100vh-645px)] overflow-auto">
             <h3>الاكثر مبيعا</h3>
             <div className="details">
                 <ul className="w-[100%]">

@@ -29,7 +29,6 @@ function DetailsSale() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response.data.data)
                 getDise(response.data.data.disease)
                 setData(response.data.data)
             })
@@ -38,7 +37,6 @@ function DetailsSale() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
             }
             );
 
@@ -56,11 +54,9 @@ function DetailsSale() {
         }
         let getDeas = await axios.request(optionsDeas)
             .then(function (response) {
-                console.log(response.data.data)
                 setDisease(response.data.data)
             })
             .catch(function (error) {
-                console.log(error.response)
             }
             );
     }

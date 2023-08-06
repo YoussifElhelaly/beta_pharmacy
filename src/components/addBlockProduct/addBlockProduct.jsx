@@ -27,7 +27,6 @@ function AddBlockProduct(props) {
     const [listDisease, setListDisease] = useState([])
     const cateInput = useRef()
 
-    console.log(addBlockArray)
 
     async function getProduct() {
         const options = {
@@ -40,7 +39,6 @@ function AddBlockProduct(props) {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response.data.data)
                 setAddBlockArray((old) => [
                     ...old, {
                         "id": response.data.data.id,
@@ -78,7 +76,7 @@ function AddBlockProduct(props) {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+              
                 toast.success(response.data.message)
                 setAddOpenBlock(false)
             })
@@ -88,7 +86,6 @@ function AddBlockProduct(props) {
                     window.location.reload()
                 }
                 toast.error(error.response.data.message)
-                console.log(error.response)
             }
             );
     }
@@ -147,7 +144,7 @@ function AddBlockProduct(props) {
                             <select ref={cateInput}>
                                 {
                                     listDisease.map((dise, index) => {
-                                        console.log(dise)
+                                       
                                         return (
                                             <option key={index}>{dise.name} </option>
                                         )
@@ -180,7 +177,7 @@ function AddBlockProduct(props) {
                         <tbody className="text-center">
                             {
                                 blockArray.map((product, index) => {
-                                    console.log(product)
+                                   
                                     return (
                                         <tr key={index}>
                                             <td>

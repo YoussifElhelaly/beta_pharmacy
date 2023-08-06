@@ -47,7 +47,7 @@ export default function AddUser() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+               
                 toast.success("تم انشاء صيدلي بنجاح")
                 clearInp()
             })
@@ -57,7 +57,7 @@ export default function AddUser() {
                     window.location.reload()
                 }
                 toast.error(error.response.data.message)
-                console.log(error.response)
+               
             }
             );
     }

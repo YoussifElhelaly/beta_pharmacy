@@ -10,13 +10,12 @@ export default function checkLog() {
       "refresh": Cookies.get("refreshToken")
     })
       .then(function (response) {
-        console.log(response)
+
         Cookies.set("islogged", true)
         Cookies.set("accessToken", response.data.access)
         Cookies.set("refreshToken", response.data.refresh)
       })
       .catch(function (error) {
-        console.log(error)
       });
 
   }

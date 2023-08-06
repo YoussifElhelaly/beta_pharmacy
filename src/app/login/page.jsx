@@ -23,15 +23,13 @@ export default function Login() {
     const [accessToken, setToken] = useRecoilState(token)
     const [isLoading, setIsLoading] = useState(false)
     async function login(email, pass) {
-        console.log(email)
-        console.log(pass)
+    
 
         let result = await axios.post('https://inventory-apis.up.railway.app/auth/login/', {
             email: email,
             password: pass
         })
             .then(function (response) {
-                console.log(response.data);
                 Cookies.set("islogged", true)
                 Cookies.set("accessToken", response.data.access)
                 Cookies.set("refreshToken", response.data.refresh)
@@ -40,7 +38,6 @@ export default function Login() {
             })
             .catch(function (error) {
                 
-                console.log(error)
                 setIsLoading(false)
                 setError(true)
                 setMessage(error.response.data.message)

@@ -36,7 +36,6 @@ export default function Sales() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response.data.data)
                 setIsLoading(false)
                 setData(response.data.data)
             })
@@ -45,7 +44,6 @@ export default function Sales() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
             }
             );
     }
@@ -61,7 +59,9 @@ export default function Sales() {
             </div>
             <div className="tableDetails bg-bgPrimary p-5 mt-5 rounded-[30px]" >
                 <h3 className="text-xl mb-5">إجمالي المبيعات</h3>
-                <SalesTable loading={isLoading} data={data} />
+                <div className="tableContainer">
+                    <SalesTable loading={isLoading} data={data} />
+                </div>
             </div>
             {
                 isCreateOpen ? <CreateSale /> : null

@@ -11,6 +11,7 @@ import token from "../../../Atom/accessToken"
 import { Badge } from "@mui/material"
 import DetailsProduct from "../DetailsProduct/DetailsProduct"
 import search from "../../../Atom/search"
+import { toast } from "react-toastify"
 
 
 function Navbar() {
@@ -33,11 +34,11 @@ function Navbar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+            
                 setData(response.data.data)
             })
             .catch(function (error) {
-                console.log(error.response)
+               
             }
             );
     }
@@ -52,21 +53,24 @@ function Navbar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response)
+               
                 setSearchProduct(response.data.data)
                 setSearch(true)
+                toast.success("تم البحث عن الدواء")
+
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error)
+                toast.error("لا يوجد منتج لهذا الكود")
             }
             );
     }
 
-    console.log(isSearch)
+    
+    
 
     useEffect(() => {
         getNotifiction()
@@ -79,7 +83,7 @@ function Navbar() {
                     <div className="input rounded-full bg-bgPrimary relative ">
                         <Image src={searchIcon} className="absolute right-5 top-[50%] translate-y-[-50%]" alt="icon"></Image>
                         <input ref={searchInp} onKeyUp={(e) => {
-                            console.log("lld")
+                           
                             if (e.code == "Enter" || e.code == "NumpadEnter") {
                                 getProduct(searchInp.current.value)
                             }

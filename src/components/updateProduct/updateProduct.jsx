@@ -16,13 +16,14 @@ import { toast } from 'react-toastify'
 import ReactLoading from 'react-loading';
 import Cookies from 'js-cookie'
 import editOpen from '../../../Atom/editOpen'
+import DetailsProductOpen from '../../../Atom/DetailsProductOpen'
 
 
 
 function UpdateProduct(props) {
 
     const file = useRef(null)
-    const [isProductOpen, setIsProductOpen] = useRecoilState(productOpen)
+    const [isProductOpen, setIsProductOpen] = useRecoilState(DetailsProductOpen)
     const [isAddOpen, setIsAddOpen] = useRecoilState(categoryOpen)
     const nameInp = useRef()
     const codeInp = useRef()
@@ -44,9 +45,7 @@ function UpdateProduct(props) {
         expireInp.current.value = null
         file.current.value = null
     }
-    console.log(today.split("/").reverse().join("-"))
     const tokken = useRecoilValue(token)
-
     const [data, setDate] = useState([])
     useEffect(() => {
         const options = {
@@ -59,7 +58,7 @@ function UpdateProduct(props) {
         }
         let result = axios.request(options)
             .then(function (response) {
-                console.log(response.data.data);
+
                 setDate(response.data.data)
 
             })
@@ -68,12 +67,12 @@ function UpdateProduct(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
+
             }
             );
     }, [isAddOpen])
 
-    async function uploadImg(id) {
+    async function updateData(id) {
         let formData = new FormData()
         formData.append("name", nameInp.current.value)
         formData.append("price", priceInp.current.value)
@@ -99,6 +98,8 @@ function UpdateProduct(props) {
             .then(function (response) {
                 setIsLoading(false)
                 toast.success(response.data.message)
+                setIsEdit(false)
+                setIsProductOpen(false)
                 emptyInputs()
             })
             .catch(function (error) {
@@ -107,7 +108,7 @@ function UpdateProduct(props) {
                     window.location.reload()
                 }
                 setIsLoading(false)
-                toast.error(error.response.data.message)
+                toast.error(error.response)
             }
             );
     }
@@ -144,7 +145,7 @@ function UpdateProduct(props) {
                                 {
                                     data.map((product, index) => {
                                         return (
-                                            <option key={index} value={product.id} selected={product.id === props.edit.category ? true : false}> {product.name}</option>
+                                            <option key={index} value={product.name} selected={product.id === props.edit.category ? true : false}> {product.name}</option>
 
                                         )
                                     })
@@ -175,7 +176,8 @@ function UpdateProduct(props) {
 
                 <button disabled={isLoading} onClick={() => {
                     setIsLoading(true)
-                    uploadImg(props.edit.id)
+
+                    updateData(props.edit.id)
 
                 }} className={`bg-primary px-[50px] text-[#fff] w-full py-5 my-5 rounded-[10px] ${isLoading ? "cursor-not-allowed" : null}`}>
                     {

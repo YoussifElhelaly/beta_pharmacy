@@ -73,7 +73,6 @@ function CreateSale() {
     }
 
     async function checkMed(id) {
-        console.log(id)
         const options = {
             method: 'POST',
             url: `${BaseUrl}/solds/check-medicine/`,
@@ -106,7 +105,6 @@ function CreateSale() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error)
                 if (error.response.data.message == "لا يوجد لائحة حذر لهذا المرض") {
                     toast.success("هذا الدواء مسموح به للمريض")
                     setSaleList((old) => [
@@ -148,7 +146,6 @@ function CreateSale() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
 
             }
             );
@@ -204,7 +201,7 @@ function CreateSale() {
                             <div className="details flex gap-5">
                                 <div className="img h-[168px] w-[187px] ">
                                     <Image alt='test-Img' src={`${BaseUrl}${currentProduct.medicine_img}`} width={187} height={"168"}></Image>
-                                    {console.log(`${BaseUrl}${currentProduct.medicine_img}`)}
+                                   
                                 </div>
                                 <ul className='flex flex-col justify-between'>
                                     <li>{currentProduct.name}</li>

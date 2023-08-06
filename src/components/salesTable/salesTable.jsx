@@ -8,11 +8,11 @@ function SalesTable(props) {
     const [id, setId] = useRecoilState(DetailsId)
     const [DetailsOpen, setDestailsOpen] = useRecoilState(openDetails)
     let isLoading = props.loading
-    console.log(props)
+
 
     return (
         <table className="salesTable border w-full bg-[#373854]">
-            <thead>
+            <thead className=''>
                 <tr>
 
                     <th></th>
@@ -77,33 +77,85 @@ function SalesTable(props) {
                         :
 
                         props.data.map((sale, index) => {
-                            console.log(sale)
+                           
                             return (
-                                <tr key={index}>
-                                    <td>
-                                        <button onClick={() => {
-                                            console.log("5lsaa")
-                                            setId(sale.id)
-                                            setDestailsOpen(true)
-                                        }}>تفاصيل المبيعة</button>
-                                    </td>
-                                    <td>
-                                        {sale.pharmacist}
-                                    </td>
-                                    <td>
-                                        {sale.sold_at.split("T")[0]}
-                                    </td>
-                                    <td>
-                                        {sale.sold_at.split("T")[1].split(".")[0]}
-                                    </td>
-                                    <td>
-                                        {sale.total} $
-                                    </td>
-                                    <td>
-                                        {sale.sold_items.length} units
-                                    </td>
-                                    <td>{sale.sold_number}</td>
-                                </tr>
+                                <>
+                                    <tr key={index}>
+                                        <td>
+                                            <button onClick={() => {
+                                                
+                                                setId(sale.id)
+                                                setDestailsOpen(true)
+                                            }}>تفاصيل المبيعة</button>
+                                        </td>
+                                        <td>
+                                            {sale.pharmacist}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[1].split(".")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.total} $
+                                        </td>
+                                        <td>
+                                            {sale.sold_items.length} units
+                                        </td>
+                                        <td>{sale.sold_number}</td>
+                                    </tr>
+                                    <tr key={index}>
+                                        <td>
+                                            <button onClick={() => {
+                                            
+                                                setId(sale.id)
+                                                setDestailsOpen(true)
+                                            }}>تفاصيل المبيعة</button>
+                                        </td>
+                                        <td>
+                                            {sale.pharmacist}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[1].split(".")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.total} $
+                                        </td>
+                                        <td>
+                                            {sale.sold_items.length} units
+                                        </td>
+                                        <td>{sale.sold_number}</td>
+                                    </tr>
+                                    <tr key={index}>
+                                        <td>
+                                            <button onClick={() => {
+                                             
+                                                setId(sale.id)
+                                                setDestailsOpen(true)
+                                            }}>تفاصيل المبيعة</button>
+                                        </td>
+                                        <td>
+                                            {sale.pharmacist}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.sold_at.split("T")[1].split(".")[0]}
+                                        </td>
+                                        <td>
+                                            {sale.total} $
+                                        </td>
+                                        <td>
+                                            {sale.sold_items.length} units
+                                        </td>
+                                        <td>{sale.sold_number}</td>
+                                    </tr>
+                                </>
                             )
                         })
                 }

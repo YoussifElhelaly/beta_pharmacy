@@ -33,7 +33,6 @@ export default function Home() {
     }
     let result = await axios.request(options)
       .then(function (response) {
-        console.log(response.data.data);
         setisLoading(false)
         setDate(response.data.data)
       })

@@ -42,7 +42,6 @@ function AddProduct() {
         expireInp.current.value = null
         file.current.value = null
     }
-    console.log(today.split("/").reverse().join("-"))
     const tokken = useRecoilValue(token)
 
     const [data, setDate] = useState([])
@@ -57,7 +56,6 @@ function AddProduct() {
         }
         let result = axios.request(options)
             .then(function (response) {
-                console.log(response.data.data);
                 setDate(response.data.data)
 
             })
@@ -66,7 +64,6 @@ function AddProduct() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                console.log(error.response)
             }
             );
     }, [isAddOpen])
