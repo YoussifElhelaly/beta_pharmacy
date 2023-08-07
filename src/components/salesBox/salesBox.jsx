@@ -25,7 +25,7 @@ function SalesBox() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-               
+
                 setisLoading(false)
                 setData(response.data.data)
             })
@@ -34,7 +34,7 @@ function SalesBox() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-               
+
             }
             );
     }
@@ -43,9 +43,9 @@ function SalesBox() {
     }, [])
 
     return (
-        <div className="exipredBox bg-bgPrimary w-[49%] p-5 rounded-3xl h-[calc(100vh-645px)] overflow-auto">
-            <h3>الاكثر مبيعا</h3>
-            <div className="details">
+        <div className="exipredBox bg-bgPrimary w-[49%] py-5 rounded-3xl h-[calc(100vh-645px)] ">
+            <h3 className=" px-5">الاكثر مبيعا</h3>
+            <div className="details h-[calc(100%-20px)] overflow-auto px-5">
                 <ul className="w-[100%]">
                     {
                         isLoading ?

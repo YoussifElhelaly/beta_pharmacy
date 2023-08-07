@@ -124,7 +124,7 @@ function AddProduct() {
                             <div className='relative'>
                                 <Image alt='icon' src={barcodeIcon} className='absolute right-[10px] top-[50%] translate-y-[-50%]'></Image>
 
-                                <input ref={codeInp} type="number" />
+                                <input ref={codeInp} type="number" autoFocus />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">

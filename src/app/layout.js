@@ -1,6 +1,6 @@
 "use client"
 import './globals.css'
-import { Urbanist } from 'next/font/google'
+import { Cairo, Urbanist } from 'next/font/google'
 import { RecoilRoot, useRecoilValue } from 'recoil'
 import middleware from '@/middleware'
 
@@ -10,9 +10,9 @@ import checkLog from '../checkLoggin'
 import { useEffect } from 'react'
 
 
-const inter = Urbanist({
+const inter = Cairo({
   subsets: ['latin'],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
+  weight: [ "200", "300", "400", "500", "600", "700", "800"]
 })
 
 const metadata = {

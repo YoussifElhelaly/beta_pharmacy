@@ -77,13 +77,13 @@ function SalesTable(props) {
                         :
 
                         props.data.map((sale, index) => {
-                           
+
                             return (
                                 <>
                                     <tr key={index}>
                                         <td>
                                             <button onClick={() => {
-                                                
+
                                                 setId(sale.id)
                                                 setDestailsOpen(true)
                                             }}>تفاصيل المبيعة</button>
@@ -108,7 +108,7 @@ function SalesTable(props) {
                                     <tr key={index}>
                                         <td>
                                             <button onClick={() => {
-                                            
+
                                                 setId(sale.id)
                                                 setDestailsOpen(true)
                                             }}>تفاصيل المبيعة</button>
@@ -133,7 +133,7 @@ function SalesTable(props) {
                                     <tr key={index}>
                                         <td>
                                             <button onClick={() => {
-                                             
+
                                                 setId(sale.id)
                                                 setDestailsOpen(true)
                                             }}>تفاصيل المبيعة</button>

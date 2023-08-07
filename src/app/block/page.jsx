@@ -120,21 +120,24 @@ export default function Block() {
                     </select>
 
                 </div>
-                <div className="products bg-[#373854] flex flex-wrap rounded-3xl p-10 gap-10 justify-between">
+                <div className="products max-h-[calc(100vh-368px)] overflow-auto bg-[#373854] flex flex-wrap rounded-3xl p-10 gap-10 justify-between">
                     {
                         date?.map((product, index) => {
 
                             return (
-                                <div key={index} className="product bg-[#282945] rounded-xl flex gap-5 items-center w-full p-3 2xl:w-[48%]">
-                                    <Image src={`${BaseUrl}${product.medicine_img}`} alt="medicine image" width={142} height={148}></Image>
-                                    <div className="details">
-                                        <ul>
-                                            <li>{product.name}</li>
-                                            <li>كود المنتج : {product.bar_code}  </li>
-                                            <li>السعر : {product.price} $</li>
-                                        </ul>
+                                <>
+                                    <div key={index} className="product bg-[#282945] rounded-xl flex gap-5 items-center w-full p-3 2xl:w-[48%]">
+                                        <Image src={`${BaseUrl}${product.medicine_img}`} alt="medicine image" width={142} height={148}></Image>
+                                        <div className="details">
+                                            <ul>
+                                                <li>{product.name}</li>
+                                                <li>كود المنتج : {product.bar_code}  </li>
+                                                <li>السعر : {product.price} $</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                </>
+
                             )
                         })
                     }

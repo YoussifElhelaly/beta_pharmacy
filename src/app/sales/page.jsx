@@ -59,7 +59,7 @@ export default function Sales() {
             </div>
             <div className="tableDetails bg-bgPrimary p-5 mt-5 rounded-[30px]" >
                 <h3 className="text-xl mb-5">إجمالي المبيعات</h3>
-                <div className="tableContainer">
+                <div className="tableContainer h-[calc(100vh-310px)] overflow-auto rounded-xl">
                     <SalesTable loading={isLoading} data={data} />
                 </div>
             </div>

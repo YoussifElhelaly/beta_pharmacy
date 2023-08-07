@@ -183,7 +183,7 @@ function CreateSale() {
                         </div>
                         <div className="input relative w-full text-left">
                             <label htmlFor="">كود المنتج</label>
-                            <input type="text" onKeyDown={(e) => {
+                            <input type="text" autoFocus onKeyDown={(e) => {
 
                                 if (e.code == "Enter" || e.code == "NumpadEnter") {
 

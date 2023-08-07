@@ -39,9 +39,9 @@ function ExpiredBox() {
         getData()
     }, [])
     return (
-        <div className="exipredBox bg-bgPrimary w-[49%] p-5 rounded-3xl h-[calc(100vh-645px)] overflow-auto">
-            <h3>دواء ينتهي صلاحيتة قريبا</h3>
-            <div className="details">
+        <div className="exipredBox bg-bgPrimary w-[49%] py-5 rounded-3xl h-[calc(100vh-645px)]">
+            <h3 className="px-5">دواء ينتهي صلاحيتة قريبا</h3>
+            <div className="details h-[calc(100%-20px)] overflow-auto px-5">
                 <ul className="w-[100%]">
                     {
                         isLoading ?

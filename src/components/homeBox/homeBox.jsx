@@ -83,7 +83,7 @@ function HomeBox(props) {
             <div className="boxFooter">
                 <div onClick={() => {
                     setDate(!date)
-                }} className={`toggleButton mt-[10px] flex px-3 text-[#fff] overflow-hidden relative mx-auto rounded-full justify-between bg${props.secondry} ${props.title == undefined ? "w-[55px]" : "w-[110px]"}  cursor-pointer`}>
+                }} className={`toggleButton mt-[10px] flex px-3 text-[#fff] overflow-hidden relative mx-auto rounded-full justify-between bg${props.secondry} ${props.title == undefined ? "w-[55px]" : "w-[140px]"}  cursor-pointer`}>
                     {
                         props.title == undefined ?
                             <p className="relative z-10 ">يوميا</p>
@@ -99,7 +99,7 @@ function HomeBox(props) {
                       
                       h-full absolute
                       transition-[0.5s]
-                     ${props.title == undefined ? "left-0" : date ? "left-[-1%]" : "left-[47%]"} 
+                     ${props.title == undefined ? "left-0" : date ? "left-[0%]" : "left-[47%]"} 
                       `}></span>
                 </div>
             </div>
