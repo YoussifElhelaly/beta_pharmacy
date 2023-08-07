@@ -26,7 +26,25 @@ function AddBlockProduct(props) {
     const tokken = useRecoilValue(token)
     const [listDisease, setListDisease] = useState([])
     const cateInput = useRef()
+    const [oldList, setOldList] = useState([])
 
+    console.log(props.oldData)
+
+    function checkMedInOldList() {
+        let check = false
+        props.oldData.map((product) => {
+            if (productCode.current.value == product.bar_code) {
+                check = true
+            }  
+        })
+        if (check) {
+            toast.error("هذا الدواء موجود بالفعل في هذه القائمة")
+
+        } else {
+            getProduct()
+        }
+
+    }
 
     async function getProduct() {
         const options = {
@@ -40,7 +58,8 @@ function AddBlockProduct(props) {
         let result = await axios.request(options)
             .then(function (response) {
                 setAddBlockArray((old) => [
-                    ...old, {
+                    ...old,
+                    ...props.oldData, {
                         "id": response.data.data.id,
                         "barcode": response.data.data.bar_code
                     }
@@ -56,6 +75,7 @@ function AddBlockProduct(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
+
                 toast.error(error.response.data.message)
             }
             );
@@ -65,7 +85,7 @@ function AddBlockProduct(props) {
             method: 'POST',
             url: `${BaseUrl}/banlist/create/`,
             data: {
-                "disease": cateInput.current.value,
+                "disease": JSON.parse(cateInput.current.value).name,
                 "medicines": addBlockArray
             }
             ,
@@ -76,7 +96,7 @@ function AddBlockProduct(props) {
         }
         let result = await axios.request(options)
             .then(function (response) {
-              
+
                 toast.success(response.data.message)
                 setAddOpenBlock(false)
             })
@@ -85,7 +105,42 @@ function AddBlockProduct(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                toast.error(error.response.data.message)
+                if (error.response.data.message == "يوجد بالفعل قائمة حظر لهذا المرض") {
+                    updateList()
+                }
+                console.log(error)
+            }
+            );
+    }
+    async function updateList() {
+        console.log({
+            "disease": JSON.parse(cateInput.current.value).name,
+            "medicines": addBlockArray
+        })
+        const options = {
+            method: 'PUT',
+            url: `${BaseUrl}/banlist/update/${JSON.parse(cateInput.current.value).id}/`,
+            data: {
+                "disease": JSON.parse(cateInput.current.value).name,
+                "medicines": addBlockArray
+            }
+            ,
+            headers: {
+                "Authorization": `Bearer ${tokken}`
+            },
+
+        }
+        let result = await axios.request(options)
+            .then(function (response) {
+                toast.success(response.data.message)
+                setAddOpenBlock(false)
+            })
+            .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
+                console.log(error)
             }
             );
     }
@@ -141,12 +196,13 @@ function AddBlockProduct(props) {
                                 }
 
                             </label>
-                            <select ref={cateInput}>
+                            <select ref={cateInput} onChange={() => {
+                            }}>
                                 {
                                     listDisease.map((dise, index) => {
-                                       
+
                                         return (
-                                            <option key={index}>{dise.name} </option>
+                                            <option key={index} value={JSON.stringify(dise)}>{dise.name} </option>
                                         )
                                     })
                                 }
@@ -155,7 +211,7 @@ function AddBlockProduct(props) {
                     </div>
                     <div className="flex gap-5 items-end">
 
-                        <button onClick={() => { getProduct() }} className='bg-primary text-[#fff] w-[240px]  py-4 rounded-[10px]'> أضف الدواء</button>
+                        <button onClick={() => { checkMedInOldList() }} className='bg-primary text-[#fff] w-[240px]  py-4 rounded-[10px]'> أضف الدواء</button>
                         <div className="input relative text-end flex-1">
                             <label htmlFor="">اضافة دواء جديد</label>
                             <input type="number" ref={productCode} />
@@ -177,7 +233,7 @@ function AddBlockProduct(props) {
                         <tbody className="text-center">
                             {
                                 blockArray.map((product, index) => {
-                                   
+
                                     return (
                                         <tr key={index}>
                                             <td>

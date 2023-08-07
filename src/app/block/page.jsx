@@ -79,7 +79,7 @@ export default function Block() {
         }
         let result = axios.request(options)
             .then(function (response) {
-                
+
                 getData(response.data.data[0].id)
                 setListDisease(response.data.data)
             })
@@ -88,7 +88,7 @@ export default function Block() {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-              
+
             }
             );
     }, [currentPage, addOpen])
@@ -123,7 +123,7 @@ export default function Block() {
                 <div className="products bg-[#373854] flex flex-wrap rounded-3xl p-10 gap-10 justify-between">
                     {
                         date?.map((product, index) => {
-                        
+
                             return (
                                 <div key={index} className="product bg-[#282945] rounded-xl flex gap-5 items-center w-full p-3 2xl:w-[48%]">
                                     <Image src={`${BaseUrl}${product.medicine_img}`} alt="medicine image" width={142} height={148}></Image>
@@ -141,7 +141,7 @@ export default function Block() {
 
                 </div>
                 {
-                    addOpen ? <AddBlockProduct current={currentPage} /> : null
+                    addOpen ? <AddBlockProduct current={currentPage} oldData={date} /> : null
                 }
 
             </div>

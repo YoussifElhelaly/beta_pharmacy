@@ -28,7 +28,9 @@ export default function checkLog() {
       getNewToken()
     }
   }
-  if (Cookies.get("accessToken") == undefined || Cookies.get("refreshToken") == undefined) {
+  if (Cookies.get("accessToken") == undefined ||
+    Cookies.get("refreshToken") == undefined
+  ) {
     Cookies.set("islogged", false)
     Cookies.set("accessToken", "")
     Cookies.set("refreshToken", "")
