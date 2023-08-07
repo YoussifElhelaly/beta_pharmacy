@@ -35,7 +35,7 @@ function AddBlockProduct(props) {
         props.oldData.map((product) => {
             if (productCode.current.value == product.bar_code) {
                 check = true
-            }  
+            }
         })
         if (check) {
             toast.error("هذا الدواء موجود بالفعل في هذه القائمة")
@@ -81,13 +81,26 @@ function AddBlockProduct(props) {
             );
     }
     async function addList() {
-        const options = {
-            method: 'POST',
-            url: `${BaseUrl}/banlist/create/`,
-            data: {
+        let url
+        let data
+        if (props.current == true) {
+            url = `${BaseUrl}/banlist/create/`
+            data = {
                 "disease": JSON.parse(cateInput.current.value).name,
                 "medicines": addBlockArray
             }
+        }
+        if (props.current == false) {
+            url = `${BaseUrl}/dangerlist/create/`
+            data = {
+                "category": JSON.parse(cateInput.current.value).name,
+                "medicines": addBlockArray
+            }
+        }
+        const options = {
+            method: 'POST',
+            url: url,
+            data: data
             ,
             headers: {
                 "Authorization": `Bearer ${tokken}`
@@ -105,7 +118,9 @@ function AddBlockProduct(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                if (error.response.data.message == "يوجد بالفعل قائمة حظر لهذا المرض") {
+                if (error.response.data.message == "يوجد بالفعل قائمة حظر لهذا المرض" ||
+                    error.response.data.message == "يوجد بالفعل قائمة حظر لهذه الفئة"
+                ) {
                     updateList()
                 }
                 console.log(error)
@@ -113,17 +128,26 @@ function AddBlockProduct(props) {
             );
     }
     async function updateList() {
-        console.log({
-            "disease": JSON.parse(cateInput.current.value).name,
-            "medicines": addBlockArray
-        })
-        const options = {
-            method: 'PUT',
-            url: `${BaseUrl}/banlist/update/${JSON.parse(cateInput.current.value).id}/`,
-            data: {
+        let url
+        let data
+        if (props.current == true) {
+            url = `${BaseUrl}/banlist/update/${JSON.parse(cateInput.current.value).id}/`
+            data = {
                 "disease": JSON.parse(cateInput.current.value).name,
                 "medicines": addBlockArray
             }
+        }
+        if (props.current == false) {
+            url = `${BaseUrl}/dangerlist/update/${JSON.parse(cateInput.current.value).id}/`
+            data = {
+                "category": JSON.parse(cateInput.current.value).name,
+                "medicines": addBlockArray
+            }
+        }
+        const options = {
+            method: 'PUT',
+            url: url,
+            data: data
             ,
             headers: {
                 "Authorization": `Bearer ${tokken}`

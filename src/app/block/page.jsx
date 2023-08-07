@@ -39,7 +39,7 @@ export default function Block() {
 
         const options = {
             method: 'GET',
-            url: `${BaseUrl}/banlist/get/${id}/`,
+            url: url,
             headers: {
                 "Authorization": `Bearer ${tokken}`
             },
