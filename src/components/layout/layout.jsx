@@ -5,7 +5,7 @@ function Layout({ children }) {
     return (
         <div className="h-[calc(100vh-50px)]">
             <div className="flex h-full gap-[45px]">
-                <div className="min-w-[310px] w-[20%] h-full">
+                <div className="min-w-[310px] h-full">
                     <Sidebar />
 
                 </div>

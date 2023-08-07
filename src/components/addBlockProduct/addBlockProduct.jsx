@@ -28,11 +28,42 @@ function AddBlockProduct(props) {
     const cateInput = useRef()
     const [oldList, setOldList] = useState([])
 
-    console.log(props.oldData)
+
+    async function getData(id) {
+
+        let url
+        if (props.current == true) {
+            url = `${BaseUrl}/banlist/get/${id}/`
+        }
+        if (props.current == false) {
+            url = `${BaseUrl}/dangerlist/get/${id}/`
+
+        }
+
+        const options = {
+            method: 'GET',
+            url: url,
+            headers: {
+                "Authorization": `Bearer ${tokken}`
+            },
+        }
+        let result = axios.request(options)
+            .then(function (response) {
+                setOldList(response.data.data.medicine)
+            })
+            .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
+                setOldList([])
+            }
+            );
+    }
 
     function checkMedInOldList() {
         let check = false
-        props.oldData.map((product) => {
+        oldList.map((product) => {
             if (productCode.current.value == product.bar_code) {
                 check = true
             }
@@ -59,7 +90,7 @@ function AddBlockProduct(props) {
             .then(function (response) {
                 setAddBlockArray((old) => [
                     ...old,
-                    ...props.oldData, {
+                    ...oldList, {
                         "id": response.data.data.id,
                         "barcode": response.data.data.bar_code
                     }
@@ -80,6 +111,7 @@ function AddBlockProduct(props) {
             }
             );
     }
+
     async function addList() {
         let url
         let data
@@ -127,6 +159,7 @@ function AddBlockProduct(props) {
             }
             );
     }
+
     async function updateList() {
         let url
         let data
@@ -220,7 +253,8 @@ function AddBlockProduct(props) {
                                 }
 
                             </label>
-                            <select ref={cateInput} onChange={() => {
+                            <select ref={cateInput} onChange={(e) => {
+                                getData(JSON.parse(cateInput.current.value).id)
                             }}>
                                 {
                                     listDisease.map((dise, index) => {

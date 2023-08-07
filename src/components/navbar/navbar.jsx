@@ -99,7 +99,7 @@ function Navbar() {
                                 <Image onClick={() => setOpen(!isOpen)} src={notifIcon} className="w-[30px] h-[30px] cursor-pointer" alt="icon"></Image>
                             </Badge>
                         </div>
-                        <div className={`notifictionWrapper absolute left-0 top-full
+                        <div onMouseLeave={()=>{setOpen(false)}} className={`notifictionWrapper absolute left-0 top-full
                      bg-[#fff]  w-[380px]
                      ${isOpen ? "h-[320px]" : "h-0"}
                      transition-[0.5s]

@@ -48,7 +48,7 @@ function Sidebar() {
 
 
     return (
-        <div className="sidebar fixed top-[25px] h-[calc(100%-60px)] bg-bgPrimary rounded-[70px] w-fit">
+        <div className="sidebar fixed top-[25px] h-[calc(100%-60px)] bg-bgPrimary rounded-[50px] w-fit">
             <ul className="flex justify-around h-full flex-col py-[50px] text-2xl 2xl:text-[28px]">
                 <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2>
                 <li className={` ${pathName === "/" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
