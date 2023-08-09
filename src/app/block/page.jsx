@@ -24,19 +24,17 @@ export default function Block() {
     const [date, setDate] = useState([])
     const tokken = useRecoilValue(token)
     const test = useRef()
-
+    const [selected, setSelected] = useState(0)
 
     async function getData(id) {
-
+        setSelected(id)
         let url
         if (currentPage == true) {
             url = `${BaseUrl}/banlist/get/${id}/`
         }
         if (currentPage == false) {
             url = `${BaseUrl}/dangerlist/get/${id}/`
-
         }
-
         const options = {
             method: 'GET',
             url: url,
@@ -80,9 +78,13 @@ export default function Block() {
         }
         let result = axios.request(options)
             .then(function (response) {
-
-                getData(response.data.data[0].id)
                 setListDisease(response.data.data)
+                if(selected === 0 ) {
+                    getData(response.data.data[0].id)
+                }
+                if (selected > 0) {
+                    getData(selected)
+                }
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
@@ -109,8 +111,10 @@ export default function Block() {
                     }
                     </label>
                     <Image src={addIcon} onClick={() => setAddOpen(true)} className=' cursor-pointer absolute bottom-[10px] right-[-50px]'></Image>
-
-                    <select onChange={() => { getData(test.current.value) }} dir="ltr" ref={test} className="p-4 w-[490px] shadow-sm rounded-md">
+                    <select onChange={() => {
+                        setSelected(test.current.value)
+                        getData(test.current.value)
+                    }} dir="ltr" ref={test} className="p-4 w-[490px] shadow-sm rounded-md">
                         {
                             listDisease?.map((dis, index) => {
                                 return (
