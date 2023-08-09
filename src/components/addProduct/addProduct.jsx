@@ -32,6 +32,13 @@ function AddProduct() {
     const date = new Date()
     const today = date.toLocaleDateString()
     const [isLoading, setIsLoading] = useState(false)
+    const [image, setImage] = useState(addImage)
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]));
+        }
+    }
 
     function emptyInputs() {
         nameInp.current.value = null
@@ -114,8 +121,10 @@ function AddProduct() {
                     <div className="addImage w-[390px] flex justify-center items-center flex-col">
                         <h4 className='text-[20px] mb-2'>اضافة صور المنتج</h4>
                         <div className="img relative">
-                            <input type="file" ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
-                            <Image alt='icon' src={addImage} className='h-[350px] w-[390px]'></Image>
+                            <input type="file" onChange={(e) => {
+                                onImageChange(e)
+                            }} ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
+                            <Image alt='icon' src={image} width={390} height={350} ></Image>
                         </div>
                     </div>
                     <div className='form w-1/2'>
