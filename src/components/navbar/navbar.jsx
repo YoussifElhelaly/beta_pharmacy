@@ -34,11 +34,12 @@ function Navbar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-            
+                console.log(response.data.data)
                 setData(response.data.data)
+
             })
             .catch(function (error) {
-               
+
             }
             );
     }
@@ -53,7 +54,7 @@ function Navbar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-               
+
                 setSearchProduct(response.data.data)
                 setSearch(true)
                 toast.success("تم البحث عن الدواء")
@@ -69,8 +70,8 @@ function Navbar() {
             );
     }
 
-    
-    
+
+
 
     useEffect(() => {
         getNotifiction()
@@ -83,7 +84,7 @@ function Navbar() {
                     <div className="input rounded-full bg-bgPrimary relative ">
                         <Image src={searchIcon} className="absolute right-5 top-[50%] translate-y-[-50%]" alt="icon"></Image>
                         <input ref={searchInp} onKeyUp={(e) => {
-                           
+
                             if (e.code == "Enter" || e.code == "NumpadEnter") {
                                 getProduct(searchInp.current.value)
                             }
@@ -94,12 +95,12 @@ function Navbar() {
                 <div className="userInfo flex justify-between items-center">
                     <div className="notifictionBox relative">
                         <div className="icon">
-                            <Badge badgeContent={data.length} className="z-[20 !]" color="error">
+                            <Badge badgeContent={data.length} className="z-[20]" color="error">
 
                                 <Image onClick={() => setOpen(!isOpen)} src={notifIcon} className="w-[30px] h-[30px] cursor-pointer" alt="icon"></Image>
                             </Badge>
                         </div>
-                        <div onMouseLeave={()=>{setOpen(false)}} className={`notifictionWrapper absolute left-0 top-full
+                        <div onMouseLeave={() => { setOpen(false) }} className={`notifictionWrapper absolute left-0 top-full
                      bg-[#fff]  w-[380px]
                      ${isOpen ? "h-[320px]" : "h-0"}
                      transition-[0.5s]

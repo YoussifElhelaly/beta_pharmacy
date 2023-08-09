@@ -19,8 +19,9 @@ export default function Home() {
 
 
   const [accessToken, setToken] = useRecoilState(token)
-  const [data, setDate] = useState([])
+  const [dataMed, setDateMed] = useState([])
   const [isLoading, setisLoading] = useState(true)
+  const [solds, setSolds] = useState([])
 
   async function getMedicine() {
     const options = {
@@ -34,7 +35,29 @@ export default function Home() {
     let result = await axios.request(options)
       .then(function (response) {
         setisLoading(false)
-        setDate(response.data.data)
+        setDateMed(response.data.data)
+      })
+      .catch(function (error) {
+        if (error.response.status === 401) {
+          Cookies.set("islogged", false)
+          window.location.reload()
+        }
+      }
+      );
+  }
+  async function getSales() {
+    const options = {
+      method: 'GET',
+      url: `${BaseUrl}/solds/get/all/`,
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      },
+
+    }
+    let result = await axios.request(options)
+      .then(function (response) {
+        setisLoading(false)
+        setSolds(response.data.data)
       })
       .catch(function (error) {
         if (error.response.status === 401) {
@@ -49,6 +72,7 @@ export default function Home() {
 
   useEffect(() => {
     getMedicine()
+    getSales()
   }, [])
 
   return (
@@ -56,10 +80,13 @@ export default function Home() {
       <section className="home h-[calc(100vh-140px)]">
 
         <div className="boxWrapper flex flex-wrap gap-x-[40px] gap-y-[30px]">
-          <HomeBox type="orders" primary="Vilot" secondry="VilotLow" title="إجمالي المبيعات" />
-          <HomeBox type="sales" primary="Red" secondry="RedLow" title="اجمالي الطلابات" />
+          <HomeBox type="sales" primary="Vilot" secondry="VilotLow" title="إجمالي المبيعات" />
+          <HomeBox type="orders" primary="Red" secondry="RedLow" title="اجمالي الطلابات" />
           <HomeBox primary="Green" secondry="GreenLow" type="sales" />
-          <HomeBoxList loading={isLoading} secondry="GreenLow" data={data} name=" الدواء المضاف حديثا" />
+          <HomeBox primary="Vilot" secondry="VilotLow" type="danger-adds" title="عدد مرات بيع منتج محظور
+بموجب لائحة طبية" />
+          <HomeBoxList loading={isLoading} secondry="GreenLow" data={dataMed} name=" الدواء المضاف حديثا" />
+          <HomeBoxList loading={isLoading} secondry="RedLow" data={solds} name="المبيعات  المضافة حديثا" type="sales"/>
         </div>
         <div className="infoWrapper flex justify-between mt-10">
           <SalesBox />

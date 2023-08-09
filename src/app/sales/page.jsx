@@ -50,7 +50,7 @@ export default function Sales() {
 
     useEffect(() => {
         getProduct()
-    }, [])
+    }, [isCreateOpen])
 
     return (
         <Layout>

@@ -16,6 +16,7 @@ function DetailsSale() {
     const tokken = useRecoilValue(token)
     const [isOpen, setisOpen] = useRecoilState(openDetails)
     const id = useRecoilValue(DetailsId)
+    let date = new Date(data?.sold_at)
 
 
     async function getDetails() {
@@ -63,7 +64,7 @@ function DetailsSale() {
 
     useEffect(() => {
         getDetails()
-    })
+    },[])
 
     return (
         <div className="detailsSale z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
@@ -89,7 +90,7 @@ function DetailsSale() {
                         </div>
                         <div className="input flex flex-col items-end w-full">
                             <label htmlFor="">وقت المبيعة </label>
-                            <input type="text" disabled defaultValue={data?.sold_at.split("T")[1].split(".")[0]} />
+                            <input type="text" disabled defaultValue={date.toString().split(" ")[4]} />
                         </div>
                     </div>
                     <div className=" flex gap-5 mb-5">

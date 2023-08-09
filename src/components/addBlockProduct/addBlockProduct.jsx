@@ -260,7 +260,7 @@ function AddBlockProduct(props) {
                                     listDisease.map((dise, index) => {
 
                                         return (
-                                            <option key={index} value={JSON.stringify(dise)}>{dise.name} </option>
+                                            <option key={index} value={JSON.stringify(dise)} selected={props.currentValue == dise.id ? true : false}>{dise.name} </option>
                                         )
                                     })
                                 }

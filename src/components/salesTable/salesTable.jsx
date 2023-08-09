@@ -28,7 +28,7 @@ function SalesTable(props) {
                 {
                     isLoading ?
                         <>
-                            <tr>
+                            <tr key={1}>
                                 <td>
                                     <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                                 </td>
@@ -39,7 +39,7 @@ function SalesTable(props) {
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                             </tr>
-                            <tr>
+                            <tr key={2}>
                                 <td>
                                     <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                                 </td>
@@ -50,7 +50,7 @@ function SalesTable(props) {
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                             </tr>
-                            <tr>
+                            <tr key={3}>
                                 <td>
                                     <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                                 </td>
@@ -61,7 +61,7 @@ function SalesTable(props) {
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                                 <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
                             </tr>
-                            <tr>
+                            <tr key={4}>
                                 <td>
                                     <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                                 </td>
@@ -80,56 +80,6 @@ function SalesTable(props) {
 
                             return (
                                 <>
-                                    <tr key={index}>
-                                        <td>
-                                            <button onClick={() => {
-
-                                                setId(sale.id)
-                                                setDestailsOpen(true)
-                                            }}>تفاصيل المبيعة</button>
-                                        </td>
-                                        <td>
-                                            {sale.pharmacist}
-                                        </td>
-                                        <td>
-                                            {sale.sold_at.split("T")[0]}
-                                        </td>
-                                        <td>
-                                            {sale.sold_at.split("T")[1].split(".")[0]}
-                                        </td>
-                                        <td>
-                                            {sale.total} $
-                                        </td>
-                                        <td>
-                                            {sale.sold_items.length} units
-                                        </td>
-                                        <td>{sale.sold_number}</td>
-                                    </tr>
-                                    <tr key={index}>
-                                        <td>
-                                            <button onClick={() => {
-
-                                                setId(sale.id)
-                                                setDestailsOpen(true)
-                                            }}>تفاصيل المبيعة</button>
-                                        </td>
-                                        <td>
-                                            {sale.pharmacist}
-                                        </td>
-                                        <td>
-                                            {sale.sold_at.split("T")[0]}
-                                        </td>
-                                        <td>
-                                            {sale.sold_at.split("T")[1].split(".")[0]}
-                                        </td>
-                                        <td>
-                                            {sale.total} $
-                                        </td>
-                                        <td>
-                                            {sale.sold_items.length} units
-                                        </td>
-                                        <td>{sale.sold_number}</td>
-                                    </tr>
                                     <tr key={index}>
                                         <td>
                                             <button onClick={() => {

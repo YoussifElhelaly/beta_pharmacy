@@ -29,21 +29,27 @@ function ConfirmSale(props) {
     const tokken = useRecoilValue(token)
     const [isLoading, setIsLoading] = useState(false)
 
+    console.log(time)
 
-
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     function getSumQuan() {
         let sum = 0
         props.saleList.map((product) => {
             sum += product.quantity
         })
-        return sum
+        return numberWithCommas(sum)
     }
     function getSumPrice() {
         let sum = 0
-        props.list.map((product) => {
-
-            sum = sum + +product.price
+        props.list.map((product, index) => {
+            console.log(product)
+            if (props.saleList[index].quantity > 1) {
+                sum += props.saleList[index].quantity * product.price
+            } else (
+                sum = sum + +product.price)
         })
         return sum
     }
@@ -71,7 +77,7 @@ function ConfirmSale(props) {
             })
             .catch(function (error) {
                 setIsLoading(false)
-                toast.error("يوجد منتج في هذه المبيعة ليس متوفر  في المخزون الكمية المطلوبة  ")
+                toast.error("يوجد منتج في هذه المبيعة ليس متوفر  منه الكمية المطلوبة في المخزون   ")
             }
 
             );

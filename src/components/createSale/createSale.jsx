@@ -61,6 +61,7 @@ function CreateSale() {
             .then(function (response) {
                 toast.success("تم البحث عن الدواء")
                 setCurrentProduct(response.data.data)
+                quantityInp.current.value = 1
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
@@ -128,6 +129,7 @@ function CreateSale() {
     }
 
     async function getDeas() {
+
         const options = {
             method: 'GET',
             url: `${BaseUrl}/disease/get/all/`,
@@ -157,7 +159,7 @@ function CreateSale() {
 
     useEffect(() => {
         getDeas()
-    },[])
+    }, [])
 
     return (
 
@@ -183,7 +185,7 @@ function CreateSale() {
                         </div>
                         <div className="input relative w-full text-left">
                             <label htmlFor="">كود المنتج</label>
-                            <input type="text" autoFocus onKeyDown={(e) => {
+                            <input type="text" className='h-[62px]' autoFocus onKeyDown={(e) => {
 
                                 if (e.code == "Enter" || e.code == "NumpadEnter") {
 
@@ -201,17 +203,17 @@ function CreateSale() {
                             <div className="details flex gap-5">
                                 <div className="img h-[168px] w-[187px] ">
                                     <Image alt='test-Img' src={`${BaseUrl}${currentProduct.medicine_img}`} width={187} height={"168"}></Image>
-                                   
+
                                 </div>
                                 <ul className='flex flex-col justify-between'>
                                     <li>{currentProduct.name}</li>
                                     <li>كود المنتج : {currentProduct.bar_code}  </li>
-                                    <li>السعر : 16.6 $</li>
+                                    <li>السعر : {currentProduct.price} $</li>
                                     <li className='flex items-center '>الكمية
-                                        <div className="counter relative w-[100px] ms-4">
+                                        <div className="counter relative w-[130px] ms-4">
                                             <input ref={quantityInp} type="number" className='text-center h-full w-full bg-secondary text-[#fff] p-[2px] rounded focus-visible:outline-none' defaultValue="1" min="1" />
-                                            <button className='absolute left-0 bg-[#fff] w-[24px] h-[24px] text-center rounded shadow-lg' onClick={() => quantityInp.current.value = +quantityInp.current.value + 1}>+</button>
-                                            <button className='absolute right-0 bg-[#fff] w-[24px] h-[24px] text-center rounded shadow-lg' onClick={() => quantityInp.current.value > 1 ? quantityInp.current.value -= 1 : null}>-</button>
+                                            <button className='absolute left-0 bg-[#fff] w-[34px] h-[34px] text-center rounded shadow-lg' onClick={() => quantityInp.current.value = +quantityInp.current.value + 1}>+</button>
+                                            <button className='absolute right-0 bg-[#fff] w-[34px] h-[34px] text-center rounded shadow-lg' onClick={() => quantityInp.current.value > 1 ? quantityInp.current.value -= 1 : null}>-</button>
                                         </div>
                                     </li>
                                     <li>تاريخ انتهاء الصلاحية : 15/12/2023</li>

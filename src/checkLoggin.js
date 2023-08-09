@@ -1,16 +1,16 @@
 import jwt_decode from "jwt-decode";
 import Cookies from 'js-cookie'
 import axios from "axios";
+import { BaseUrl } from "./app/layout";
 
 export default function checkLog() {
 
 
   async function getNewToken() {
-    let result = await axios.post('https://inventory-apis.up.railway.app/auth/refresh/', {
+    let result = await axios.post(`${BaseUrl}/auth/refresh/`, {
       "refresh": Cookies.get("refreshToken")
     })
       .then(function (response) {
-
         Cookies.set("islogged", true)
         Cookies.set("accessToken", response.data.access)
         Cookies.set("refreshToken", response.data.refresh)

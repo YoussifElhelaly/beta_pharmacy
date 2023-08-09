@@ -31,7 +31,7 @@ function HomeBox(props) {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                
+
                 setisLoading(false)
                 setCurrentData(response.data)
             })
@@ -40,10 +40,28 @@ function HomeBox(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
-                
+
             }
             );
     }
+    function nFormatter(num, digits) {
+        const lookup = [
+            { value: 1, symbol: "" },
+            { value: 1e3, symbol: "k" },
+            { value: 1e6, symbol: "M" },
+            { value: 1e9, symbol: "G" },
+            { value: 1e12, symbol: "T" },
+            { value: 1e15, symbol: "P" },
+            { value: 1e18, symbol: "E" }
+        ];
+        const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+        var item = lookup.slice().reverse().find(function (item) {
+            return num >= item.value;
+        });
+        return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+    }
+
+    console.log(currentData , props.title)
 
     useEffect(() => {
         getData()
@@ -66,11 +84,11 @@ function HomeBox(props) {
                 <p className="text-[50px] font-semibold ">
                     {
                         isLoading ? <Skeleton className="rounded-md mx-auto" variant="rectangular" width={100} height={60} /> :
-                            (props.type === "sales" ? currentData.profits : currentData.sales_count)
+                            (props.type === "sales" ? nFormatter(currentData.profits , 1) : currentData.sales_count)
 
                     }
 
-
+                    {props.type === "sales" ? " $" : null}
                 </p>
                 {
                     currentData.increase_percentage ?
