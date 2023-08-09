@@ -32,7 +32,7 @@ function DetailsProduct(props) {
                         <ul className='flex flex-col justify-between text-[#000] text-xl'>
                             <li>{props.currentProduct.name}</li>
                             <li>كود المنتج : {props.currentProduct.bar_code}  </li>
-                            <li>السعر : 16.6 $</li>
+                            <li>السعر : {props.currentProduct.price} $</li>
                             <li className='flex items-center '>
 
                                 الكمية : {props.currentProduct.stock}
