@@ -113,6 +113,9 @@ function AddBlockProduct(props) {
     }
 
     async function addList() {
+
+        console.log(addBlockArray)
+
         let url
         let data
         if (props.current == true) {
@@ -163,6 +166,7 @@ function AddBlockProduct(props) {
     async function updateList() {
         let url
         let data
+        console.log(addBlockArray)
         if (props.current == true) {
             url = `${BaseUrl}/banlist/update/${JSON.parse(cateInput.current.value).id}/`
             data = {
@@ -208,6 +212,7 @@ function AddBlockProduct(props) {
 
 
     useEffect(() => {
+        getData(props.currentValue)
         let url
         if (props.current == true) {
             url = `${BaseUrl}/disease/get/all/`
