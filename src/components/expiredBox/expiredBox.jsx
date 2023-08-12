@@ -57,7 +57,7 @@ function ExpiredBox() {
                                     <li key={index} className="flex items-center my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">
                                         <span className="w-[30%]">{product.exp_date}</span>
                                         <span className="w-[30%] text-center" dir="ltr">{product.stock} units</span>
-                                        <p className="w-[30%] text-left">{product.name}</p></li>
+                                        <p className="w-[30%] text-left text-ellipsis overflow-hidden " dir="ltr">{product.name}</p></li>
 
                                 )
                             })

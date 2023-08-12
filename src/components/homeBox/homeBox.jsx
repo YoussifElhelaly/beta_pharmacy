@@ -61,7 +61,7 @@ function HomeBox(props) {
         return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
     }
 
-    console.log(currentData , props.title)
+    console.log(currentData, props.title)
 
     useEffect(() => {
         getData()
@@ -84,11 +84,15 @@ function HomeBox(props) {
                 <p className="text-[50px] font-semibold ">
                     {
                         isLoading ? <Skeleton className="rounded-md mx-auto" variant="rectangular" width={100} height={60} /> :
-                            (props.type === "sales" ? nFormatter(currentData.profits , 1) : currentData.sales_count)
+                            (props.type === "sales" ? ` ${nFormatter(currentData.profits, 1)} $` :
+                                props.type === "danger-adds" ?
+                                    currentData.count
+                                :
+                            currentData.sales_count
+                    )
 
-                    }
+                        }
 
-                    {props.type === "sales" ? " $" : null}
                 </p>
                 {
                     currentData.increase_percentage ?

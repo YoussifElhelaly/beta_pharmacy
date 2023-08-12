@@ -22,6 +22,7 @@ function Navbar() {
     const [isSearch, setSearch] = useRecoilState(search)
     const searchInp = useRef(null)
     const [searchProduct, setSearchProduct] = useState({})
+    const [notifiSeen, setnotifiSeen] = useState(false)
 
     async function getNotifiction() {
         const options = {
@@ -34,7 +35,6 @@ function Navbar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-                console.log(response.data.data)
                 setData(response.data.data)
 
             })
@@ -73,10 +73,47 @@ function Navbar() {
 
 
 
+
+    function CountNotifi() {
+        let counter = 0
+        data.map((notifi) => {
+            if (notifi.seen == false) {
+                counter += 1
+            }
+
+        })
+        return counter
+    }
+
+    async function seenNotifi(id) {
+        const options = {
+            method: 'PUT',
+            url: `${BaseUrl}/notification/see/${id}/`,
+            headers: {
+                "Authorization": `Bearer ${accessToken}`
+            },
+
+        }
+        let result = await axios.request(options)
+            .then(function (response) {
+                toast.success(response.data.message)
+
+                setnotifiSeen(!notifiSeen)
+            })
+            .catch(function (error) {
+                if (error.response.status === 401) {
+                    Cookies.set("islogged", false)
+                    window.location.reload()
+                }
+            }
+            );
+    }
+
+    console.log(data)
+
     useEffect(() => {
         getNotifiction()
-    }, [])
-
+    }, [notifiSeen])
     return (
         <>
             <nav className="flex bg-[#fff] items-center justify-between mb-8">
@@ -95,7 +132,7 @@ function Navbar() {
                 <div className="userInfo flex justify-between items-center">
                     <div className="notifictionBox relative">
                         <div className="icon">
-                            <Badge badgeContent={data.length} className="z-[20]" color="error">
+                            <Badge badgeContent={CountNotifi()} className="z-[20]" color="error">
 
                                 <Image onClick={() => setOpen(!isOpen)} src={notifIcon} className="w-[30px] h-[30px] cursor-pointer" alt="icon"></Image>
                             </Badge>
@@ -109,11 +146,13 @@ function Navbar() {
                             <ul className="notifictionList py-5">
                                 {
                                     data?.map((notifi, index) => {
+
                                         return (
                                             <>
-                                                <li key={index} className="notifictionItem text-secondary p-4 odd:bg-bgPrimary even:bg-[#fff]">
-                                                    <h3 className="text-[24px]">{notifi.content}</h3>
-                                                    <p>كود المنتج 225848964</p>
+                                                <li key={index} className={`notifictionItem text-secondary p-4 border-[#999999] border-b-2  ${notifi.seen ? "odd:bg-bgPrimary even:bg-[#fff]" : "bg-[#E3E4FF]"} cursor-pointer`} onClick={() => {
+                                                    seenNotifi(notifi.id)
+                                                }}>
+                                                    <h3 className="text-[20px]">{notifi.content}</h3>
                                                 </li>
                                             </>
                                         )

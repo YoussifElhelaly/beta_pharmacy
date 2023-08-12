@@ -94,14 +94,19 @@ export default function Block() {
 
             }
             );
+            
     }, [currentPage, addOpen])
 
 
     return (
         <Layout>
             <ul className="flex gap-5">
-                <li onClick={() => { setCureentPage(true) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "text-vilot border-b-2" : ""} `}>قائمة الامراض </li>
-                <li onClick={() => { setCureentPage(false) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "" : "text-vilot border-b-2"} `}>قائمة محظورات اللوائح الطبية</li>
+                <li onClick={() => {
+                    setSelected(0)
+                    setCureentPage(true) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "text-vilot border-b-2" : ""} `}>قائمة الامراض </li>
+                <li onClick={() => { 
+                    setSelected(0)
+                    setCureentPage(false) }} className={`cursor-pointer text-[20px] font-semibold ${currentPage ? "" : "text-vilot border-b-2"} `}>قائمة محظورات اللوائح الطبية</li>
             </ul>
             <div className="tableDetails bg-bgPrimary pt-5 mt-5 rounded-xl text-[20px] text-[#fff]" >
 
