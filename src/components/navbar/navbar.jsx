@@ -85,28 +85,30 @@ function Navbar() {
         return counter
     }
 
-    async function seenNotifi(id) {
-        const options = {
-            method: 'PUT',
-            url: `${BaseUrl}/notification/see/${id}/`,
-            headers: {
-                "Authorization": `Bearer ${accessToken}`
-            },
+    async function seenNotifi(notifi) {
+        if (notifi.seen == false) {
+            const options = {
+                method: 'PUT',
+                url: `${BaseUrl}/notification/see/${notifi.id}/`,
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`
+                },
 
-        }
-        let result = await axios.request(options)
-            .then(function (response) {
-                toast.success(response.data.message)
-
-                setnotifiSeen(!notifiSeen)
-            })
-            .catch(function (error) {
-                if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
-                }
             }
-            );
+            let result = await axios.request(options)
+                .then(function (response) {
+                    toast.success(response.data.message)
+
+                    setnotifiSeen(!notifiSeen)
+                })
+                .catch(function (error) {
+                    if (error.response.status === 401) {
+                        Cookies.set("islogged", false)
+                        window.location.reload()
+                    }
+                }
+                );
+        }
     }
 
     console.log(data)
@@ -150,7 +152,7 @@ function Navbar() {
                                         return (
                                             <>
                                                 <li key={index} className={`notifictionItem text-secondary p-4 border-[#999999] border-b-2  ${notifi.seen ? "odd:bg-bgPrimary even:bg-[#fff]" : "bg-[#E3E4FF]"} cursor-pointer`} onClick={() => {
-                                                    seenNotifi(notifi.id)
+                                                    seenNotifi(notifi)
                                                 }}>
                                                     <h3 className="text-[20px]">{notifi.content}</h3>
                                                 </li>
