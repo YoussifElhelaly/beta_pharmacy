@@ -40,6 +40,18 @@ function AddProduct() {
         }
     }
 
+    function formatDate(date = new Date()) {
+        const year = date.toLocaleString('default', { year: 'numeric' });
+        const month = date.toLocaleString('default', {
+            month: '2-digit',
+        });
+        const day = date.toLocaleString('default', { day: '2-digit' });
+
+        console.log([year, month, day].join('-'))
+
+        return [year, month, day].join('-');
+    }
+
     function emptyInputs() {
         nameInp.current.value = null
         codeInp.current.value = null
@@ -48,8 +60,11 @@ function AddProduct() {
         quanInp.current.value = null
         expireInp.current.value = null
         file.current.value = null
+        setImage(addImage)
     }
     const tokken = useRecoilValue(token)
+
+
 
     const [data, setDate] = useState([])
     useEffect(() => {
@@ -80,12 +95,14 @@ function AddProduct() {
         formData.append("name", nameInp.current.value)
         formData.append("price", priceInp.current.value)
         formData.append("category", categoryInp.current.value)
-        formData.append("prodDate", today.split("/").reverse().join("-"))
-        formData.append("expDate", expireInp.current.value)
+        formData.append("prodDate", formatDate(new Date()))
+        formData.append("expDate", formatDate(new Date(expireInp.current.value)))
         formData.append("medicineImg", file.current.files[0] == undefined ? "" : file.current.files[0])
         formData.append("stock", quanInp.current.value)
         formData.append("stockWarnLimit", 3)
         formData.append("barCode", codeInp.current.value)
+
+        console.log(formatDate(new Date(expireInp.current.value)))
 
         const options = {
             method: 'POST',
@@ -102,6 +119,8 @@ function AddProduct() {
                 setIsLoading(false)
                 toast.success(response.data.message)
                 emptyInputs()
+                setImage(addImage)
+                setIsProductOpen(false)
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
