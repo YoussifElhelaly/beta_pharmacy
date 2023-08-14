@@ -29,7 +29,15 @@ function ConfirmSale(props) {
     const tokken = useRecoilValue(token)
     const [isLoading, setIsLoading] = useState(false)
 
-    console.log(time)
+    function formatDate(date = new Date()) {
+        const year = date.toLocaleString('default', { year: 'numeric' });
+        const month = date.toLocaleString('default', {
+            month: '2-digit',
+        });
+        const day = date.toLocaleString('default', { day: '2-digit' });
+
+        return [year, month, day].join('-');
+    }
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -116,7 +124,7 @@ function ConfirmSale(props) {
 
                                         <tr key={index}>
                                             <td>
-                                                {date.split("/").reverse().join("-")}
+                                                {formatDate(new Date())}
                                             </td>
                                             <td>
                                                 {time.split(",")[1]}

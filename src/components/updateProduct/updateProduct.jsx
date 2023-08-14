@@ -35,6 +35,13 @@ function UpdateProduct(props) {
     const today = date.toLocaleDateString()
     const [isLoading, setIsLoading] = useState(false)
     const [isEdit, setIsEdit] = useRecoilState(editOpen)
+    const [image, setImage] = useState(`${BaseUrl}${props.edit.medicine_img}`)
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]));
+        }
+    }
 
     function emptyInputs() {
         nameInp.current.value = null
@@ -72,14 +79,24 @@ function UpdateProduct(props) {
             );
     }, [isAddOpen])
 
+    function formatDate(date = new Date()) {
+        const year = date.toLocaleString('default', { year: 'numeric' });
+        const month = date.toLocaleString('default', {
+            month: '2-digit',
+        });
+        const day = date.toLocaleString('default', { day: '2-digit' });
+
+        return [year, month, day].join('-');
+    }
+
     async function updateData(id) {
         let formData = new FormData()
         formData.append("name", nameInp.current.value)
         formData.append("price", priceInp.current.value)
         formData.append("category", categoryInp.current.value)
-        formData.append("prodDate", today.split("/").reverse().join("-"))
+        formData.append("prodDate", formatDate(new Date()))
         formData.append("expDate", expireInp.current.value)
-        formData.append("medicineImg", file.current.files[0] == undefined ? "" : file.current.files[0])
+        formData.append("medicineImg", image)
         formData.append("stock", quanInp.current.value)
         formData.append("stockWarnLimit", 3)
         formData.append("barCode", codeInp.current.value)
@@ -107,6 +124,7 @@ function UpdateProduct(props) {
                     Cookies.set("islogged", false)
                     window.location.reload()
                 }
+                console.log(error)
                 setIsLoading(false)
                 toast.error(error.response)
             }
@@ -121,7 +139,9 @@ function UpdateProduct(props) {
                         <h4 className='text-[20px] mb-2'>اضافة صور المنتج</h4>
                         <div className="img relative">
                             <input type="file" ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
-                            <Image alt='icon' src={`${BaseUrl}${props.edit.medicine_img}`} width={390} height={350}></Image>
+                            <Image alt='icon' onChange={(e)=>{
+                                onImageChange(e)
+                            }} src={image} width={390} height={350}></Image>
                         </div>
                     </div>
                     <div className='form w-1/2'>

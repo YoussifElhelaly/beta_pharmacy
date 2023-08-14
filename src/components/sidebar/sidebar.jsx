@@ -14,6 +14,7 @@ import { BaseUrl } from '@/app/layout'
 import axios from 'axios'
 import { useRecoilValue } from 'recoil'
 import token from '../../../Atom/accessToken'
+import Logo from '../../Img/logo.png'
 
 function Sidebar() {
     const pathName = usePathname();
@@ -34,14 +35,14 @@ function Sidebar() {
         }
         let result = await axios.request(options)
             .then(function (response) {
-              
+
                 Cookies.set("islogged", false)
                 Cookies.set("accessToken", "")
                 Cookies.set("refreshToken", "")
                 window.location.reload()
             })
             .catch(function (error) {
-               
+
             });
 
     }
@@ -50,7 +51,8 @@ function Sidebar() {
     return (
         <div className="sidebar fixed top-[25px] h-[calc(100%-60px)] bg-bgPrimary rounded-[50px] w-fit">
             <ul className="flex justify-around h-full flex-col py-[50px] text-2xl 2xl:text-[28px]">
-                <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2>
+                {/* <h2 className="text-center text-primary text-[40px] font-semibold" >Alarm</h2> */}
+                <Image src={Logo} className='mx-auto' width={82}></Image>
                 <li className={` ${pathName === "/" || "" ? "bg-[#fff]" : ""} flex items-center pt-[10px] px-[35px] rounded-tr-full rounded-br-full 2xl:py-4 2xl:px-10 font-[500] mr-[50px]`}>
                     <Image className='ml-5' src={homeIcon} alt='icon'></Image>
                     <Link className=" block w-full " href="../../../">الرئيسية</Link>

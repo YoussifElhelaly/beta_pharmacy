@@ -86,7 +86,7 @@ export default function Home() {
           <HomeBox primary="Vilot" secondry="VilotLow" type="danger-adds" title="عدد مرات بيع منتج محظور
 بموجب لائحة طبية" />
           <HomeBoxList loading={isLoading} secondry="GreenLow" data={dataMed} name=" الدواء المضاف حديثا" />
-          <HomeBoxList loading={isLoading} secondry="RedLow" data={solds} name="المبيعات  المضافة حديثا" type="sales"/>
+          <HomeBoxList loading={isLoading} secondry="GreenLow" data={solds} name="المبيعات  المضافة حديثا" type="sales"/>
         </div>
         <div className="infoWrapper flex justify-between mt-10">
           <SalesBox />
