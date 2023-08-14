@@ -147,18 +147,20 @@ function Navbar() {
                       overflow-auto rounded-md shadow-md`}>
                             <ul className="notifictionList py-5">
                                 {
-                                    data?.map((notifi, index) => {
+                                    data.length < 1 ? <li className="p-4">لا يوجد أشعارات</li> :
 
-                                        return (
-                                            <>
-                                                <li key={index} className={`notifictionItem text-secondary p-4 border-[#999999] border-b-2  ${notifi.seen ? "odd:bg-bgPrimary even:bg-[#fff]" : "bg-[#E3E4FF]"} cursor-pointer`} onClick={() => {
-                                                    seenNotifi(notifi)
-                                                }}>
-                                                    <h3 className="text-[20px]">{notifi.content}</h3>
-                                                </li>
-                                            </>
-                                        )
-                                    })
+                                        data?.map((notifi, index) => {
+
+                                            return (
+                                                <>
+                                                    <li key={index} className={`notifictionItem text-secondary p-4 border-[#999999] border-b-2  ${notifi.seen ? "odd:bg-bgPrimary even:bg-[#fff]" : "bg-[#E3E4FF]"} cursor-pointer`} onClick={() => {
+                                                        seenNotifi(notifi)
+                                                    }}>
+                                                        <h3 className="text-[20px]">{notifi.content}</h3>
+                                                    </li>
+                                                </>
+                                            )
+                                        })
                                 }
                             </ul>
                         </div>

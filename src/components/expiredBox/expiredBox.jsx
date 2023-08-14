@@ -52,15 +52,16 @@ function ExpiredBox() {
                                 <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                             </div>
                             :
-                            data?.map((product, index) => {
-                                return (
-                                    <li key={index} className="flex items-center my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">
-                                        <span className="w-[30%]">{product.exp_date}</span>
-                                        <span className="w-[30%] text-center" dir="ltr">{product.stock} units</span>
-                                        <p className="w-[30%] text-left text-ellipsis overflow-hidden " dir="ltr">{product.name}</p></li>
+                            data.length < 1 ? <p>لا يوجد منتجات</p> :
+                                data?.map((product, index) => {
+                                    return (
+                                        <li key={index} className="flex items-center my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">
+                                            <span className="w-[30%]">{product.exp_date}</span>
+                                            <span className="w-[30%] text-center" dir="ltr">{product.stock} units</span>
+                                            <p className="w-[30%] text-left text-ellipsis overflow-hidden " dir="ltr">{product.name}</p></li>
 
-                                )
-                            })
+                                    )
+                                })
                     }
                 </ul>
             </div>

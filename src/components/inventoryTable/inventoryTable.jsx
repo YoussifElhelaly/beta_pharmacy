@@ -101,97 +101,102 @@ function InventoryTable() {
                 </div>
             </div>
             <div className="tableContainer h-[calc(100vh-410px)] overflow-auto rounded-xl">
-                <table className="salesTable border w-full bg-[#373854]">
-                    <thead>
-                        <tr>
 
-                            <th></th>
-                            <th>تاريخ انتهاء الصلاحية </th>
-                            <th>الكمية</th>
-                            <th>اسم المنتج</th>
-                            <th>كود المنتج</th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-center">
-                        {isLoading ?
-                            <>
+                {
+                    data.length < 1 ? <p className="text-3xl"> لا يوجد منتجات </p> :
+
+                        <table className="salesTable border w-full bg-[#373854]">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
-                                    </td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
-                                    </td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
-                                    </td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
-                                    </td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                    <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
-                                </tr>
 
-                            </>
-                            :
-                            data?.map((product, index) => {
-                                return (
+                                    <th></th>
+                                    <th>تاريخ انتهاء الصلاحية </th>
+                                    <th>الكمية</th>
+                                    <th>اسم المنتج</th>
+                                    <th>كود المنتج</th>
+                                </tr>
+                            </thead>
+                            <tbody className="text-center">
+                                {isLoading ?
+                                    <>
+                                        <tr>
+                                            <td>
+                                                <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                            </td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                            </td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                            </td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
+                                            </td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                            <td><Skeleton sx={{ bgcolor: '#f1f1f170' }} variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} /></td>
+                                        </tr>
 
-                                    <tr key={index}>
-                                        <td>
-                                            <button onClick={() => {
-                                                setSelectedProduct(product)
-                                                setIsOpen(true)
-                                            }}>تفاصيل المنتج</button>
-                                        </td>
-                                        <td>
-                                            {product.exp_date}
-                                        </td>
-                                        <td>
-                                            {product.stock} units
-                                        </td>
-                                        <td>
-                                            {product.name}
-                                        </td>
-                                        <td>{product.bar_code}</td>
-                                    </tr>
-                                )
+                                    </>
+                                    :
+                                    data?.map((product, index) => {
+                                        return (
 
-                            })
-                        }
+                                            <tr key={index}>
+                                                <td>
+                                                    <button onClick={() => {
+                                                        setSelectedProduct(product)
+                                                        setIsOpen(true)
+                                                    }}>تفاصيل المنتج</button>
+                                                </td>
+                                                <td>
+                                                    {product.exp_date}
+                                                </td>
+                                                <td>
+                                                    {product.stock} units
+                                                </td>
+                                                <td>
+                                                    {product.name}
+                                                </td>
+                                                <td>{product.bar_code}</td>
+                                            </tr>
+                                        )
 
-                    </tbody>
-                    {
-                        isOpen ?
-                            <DetailsProduct currentProduct={selectedProduct} />
-                            :
-                            null
-                    }
-                </table>
+                                    })
+                                }
+
+                            </tbody>
+                            {
+                                isOpen ?
+                                    <DetailsProduct currentProduct={selectedProduct} />
+                                    :
+                                    null
+                            }
+                        </table>
+                }
             </div>
         </>
     )
