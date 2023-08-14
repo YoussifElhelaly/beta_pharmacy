@@ -52,7 +52,7 @@ function ExpiredBox() {
                                 <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                             </div>
                             :
-                            data.length < 1 ? <p>لا يوجد منتجات</p> :
+                            data.length < 1 ? <p className="text-center text-3xl my-24">لا يوجد منتجات</p> :
                                 data?.map((product, index) => {
                                     return (
                                         <li key={index} className="flex items-center my-2 justify-between bg-[#ECC9C9] px-2 py-1 rounded-md">

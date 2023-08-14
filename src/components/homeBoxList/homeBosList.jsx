@@ -22,8 +22,8 @@ function HomeBoxList(props) {
                                 <Skeleton variant="rectangular" className="my-2 rounded-md" width={"100%"} height={30} />
                             </div>
                             :
-                            data.length < 1 && props.type === "sales" ? <p>لا يوجد مبيعات</p> :
-                                data.length < 1 && props.type !== "sales" ? <p>لا يوجد منتجات</p> :
+                            data.length < 1 && props.type === "sales" ? <p className="text-xl my-10">لا يوجد مبيعات</p> :
+                                data.length < 1 && props.type !== "sales" ? <p className="text-xl my-10">لا يوجد منتجات</p> :
                                     data?.map((product) => {
                                         return (
                                             props.type === "sales" ?
