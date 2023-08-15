@@ -4,11 +4,14 @@ import { NextResponse } from 'next/server'
 
 
 export default function middleware(req) {
+    const today = new Date() // get today's date
+    const dayExpire = new Date(today)
+    dayExpire.setDate(today.getDate() + 1)
     let url = req.nextUrl
     let cookie = req.cookies.get('islogged')
 
     if (req.cookies.get("accessToken") == undefined) {
-        req.cookies.set("islogged", false)
+        req.cookies.set("islogged", false )
         req.cookies.set("accessToken", "")
     }
 

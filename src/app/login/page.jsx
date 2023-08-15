@@ -30,9 +30,9 @@ export default function Login() {
             password: pass
         })
             .then(function (response) {
-                Cookies.set("islogged", true)
-                Cookies.set("accessToken", response.data.access)
-                Cookies.set("refreshToken", response.data.refresh)
+                Cookies.set("islogged", true, { expires: 900 })
+                Cookies.set("accessToken", response.data.access, { expires: 900})
+                Cookies.set("refreshToken", response.data.refresh, { expires: 900 })
                 setToken(response.data.access)
                 window.location.reload()
             })
