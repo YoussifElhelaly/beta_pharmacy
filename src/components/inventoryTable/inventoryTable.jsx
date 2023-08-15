@@ -62,6 +62,7 @@ function InventoryTable() {
         let result = await axios.request(options)
             .then(function (response) {
                 setDate([response.data.data])
+                setIsLoading(false)
             })
             .catch(function (error) {
                 if (error.response.status === 401) {

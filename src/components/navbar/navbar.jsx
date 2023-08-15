@@ -157,6 +157,7 @@ function Navbar() {
                                                         seenNotifi(notifi)
                                                     }}>
                                                         <h3 className="text-[20px]">{notifi.content}</h3>
+                                                        <p>كود المنتج {notifi.bar_code}</p>
                                                     </li>
                                                 </>
                                             )
