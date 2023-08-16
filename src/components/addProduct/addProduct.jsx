@@ -15,6 +15,7 @@ import { BaseUrl } from '@/app/layout'
 import { toast } from 'react-toastify'
 import ReactLoading from 'react-loading';
 import Cookies from 'js-cookie'
+import checkLog from '@/checkLoggin'
 
 
 
@@ -85,8 +86,8 @@ function AddProduct() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
             }
             );
@@ -126,8 +127,8 @@ function AddProduct() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 setIsLoading(false)
                 toast.error(error.response.data.message)

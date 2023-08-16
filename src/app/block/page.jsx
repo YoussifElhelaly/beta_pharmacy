@@ -13,6 +13,7 @@ import token from "../../../Atom/accessToken"
 import axios from "axios"
 import { toast } from "react-toastify"
 import Cookies from "js-cookie"
+import checkLog from "@/checkLoggin"
 
 
 export default function Block() {
@@ -49,8 +50,8 @@ export default function Block() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 toast.error(error.response.data.message)
                 setDate([])
@@ -88,8 +89,8 @@ export default function Block() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }

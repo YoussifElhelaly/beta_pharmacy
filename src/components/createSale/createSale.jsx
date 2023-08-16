@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import confirmMed from '../../../Atom/confirmMed'
 import Warning from '../Warning/Warning'
 import Cookies from 'js-cookie'
+import checkLog from '@/checkLoggin'
 
 function CreateSale() {
     const [isCreateOpen, setIsCreateOpen] = useRecoilState(createOpen)
@@ -65,8 +66,8 @@ function CreateSale() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 toast.error("لا يوجد منتج لهذا الكود")
             }
@@ -103,8 +104,8 @@ function CreateSale() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 if (error.response.data.message == "لا يوجد لائحة حذر لهذا المرض") {
                     toast.success("هذا الدواء مسموح به للمريض")
@@ -145,8 +146,8 @@ function CreateSale() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }

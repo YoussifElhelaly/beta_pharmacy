@@ -21,6 +21,10 @@ export default function checkLog() {
         Cookies.set("refreshToken", response.data.refresh, { expires: 900 })
       })
       .catch(function (error) {
+        Cookies.set("islogged", false, { expires: 900 })
+        Cookies.set("accessToken", "", { expires: 900 })
+        Cookies.set("refreshToken", "", { expires: 900 })
+        window.location.reload()
       });
 
   }

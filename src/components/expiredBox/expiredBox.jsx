@@ -5,6 +5,7 @@ import { BaseUrl } from "@/app/layout";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import Cookies from "js-cookie";
+import checkLog from "@/checkLoggin";
 
 function ExpiredBox() {
     const [data, setData] = useState([])
@@ -28,8 +29,8 @@ function ExpiredBox() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
             }
             );

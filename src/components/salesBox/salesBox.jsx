@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import token from "../../../Atom/accessToken";
 import { Skeleton } from "@mui/material";
 import Cookies from "js-cookie";
+import checkLog from "@/checkLoggin";
 
 function SalesBox() {
 
@@ -31,8 +32,8 @@ function SalesBox() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }

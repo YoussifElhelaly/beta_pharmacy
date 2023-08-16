@@ -12,6 +12,7 @@ import { Badge } from "@mui/material"
 import DetailsProduct from "../DetailsProduct/DetailsProduct"
 import search from "../../../Atom/search"
 import { toast } from "react-toastify"
+import checkLog from "@/checkLoggin"
 
 
 function Navbar() {
@@ -62,8 +63,8 @@ function Navbar() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 toast.error("لا يوجد منتج لهذا الكود")
             }
@@ -103,8 +104,8 @@ function Navbar() {
                 })
                 .catch(function (error) {
                     if (error.response.status === 401) {
-                        Cookies.set("islogged", false)
-                        window.location.reload()
+                        checkLog()
+
                     }
                 }
                 );

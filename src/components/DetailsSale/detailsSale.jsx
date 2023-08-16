@@ -8,6 +8,7 @@ import token from "../../..//Atom/accessToken"
 import openDetails from "../../../Atom/openDetails"
 import DetailsId from "../../../Atom/DetailsId"
 import Cookies from "js-cookie"
+import checkLog from "@/checkLoggin"
 
 function DetailsSale() {
 
@@ -35,8 +36,8 @@ function DetailsSale() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
             }
             );

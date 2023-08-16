@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Skeleton } from "@mui/material";
 import Cookies from "js-cookie";
 import editOpen from "../../../Atom/editOpen";
+import checkLog from "@/checkLoggin";
 
 
 function InventoryTable() {
@@ -42,8 +43,8 @@ function InventoryTable() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }
@@ -66,8 +67,8 @@ function InventoryTable() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
             }
             );

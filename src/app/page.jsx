@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BaseUrl } from './layout'
 import Cookies from 'js-cookie'
+import checkLog from '@/checkLoggin'
 
 
 
@@ -39,8 +40,7 @@ export default function Home() {
       })
       .catch(function (error) {
         if (error.response.status === 401) {
-          Cookies.set("islogged", false)
-          window.location.reload()
+          checkLog()
         }
       }
       );

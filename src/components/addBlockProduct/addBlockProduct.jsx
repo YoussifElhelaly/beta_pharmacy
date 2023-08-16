@@ -15,6 +15,7 @@ import token from '../../../Atom/accessToken'
 import deleteIcon from '../../Img/deleteIcon.png'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
+import checkLog from '@/checkLoggin'
 
 
 function AddBlockProduct(props) {
@@ -53,8 +54,8 @@ function AddBlockProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 setOldList([])
             }
@@ -103,8 +104,8 @@ function AddBlockProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
                 toast.error(error.response.data.message)
@@ -150,8 +151,8 @@ function AddBlockProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 if (error.response.data.message == "يوجد بالفعل قائمة حظر لهذا المرض" ||
                     error.response.data.message == "يوجد بالفعل قائمة حظر لهذه الفئة"
@@ -198,8 +199,8 @@ function AddBlockProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 console.log(error)
             }
@@ -235,8 +236,8 @@ function AddBlockProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 toast.error(error.response.data.message)
             }

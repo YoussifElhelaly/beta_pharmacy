@@ -13,6 +13,7 @@ import { BaseUrl } from "../layout"
 import openDetails from "../../../Atom/openDetails"
 import axios from "axios"
 import Cookies from "js-cookie"
+import checkLog from "@/checkLoggin"
 
 export default function Sales() {
 
@@ -41,8 +42,8 @@ export default function Sales() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
             }
             );

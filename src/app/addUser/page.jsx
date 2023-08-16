@@ -13,6 +13,7 @@ import { BaseUrl } from "../layout"
 import { useRecoilValue } from "recoil"
 import { toast } from "react-toastify"
 import Cookies from "js-cookie"
+import checkLog from "@/checkLoggin"
 
 export default function AddUser() {
 
@@ -53,8 +54,8 @@ export default function AddUser() {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 toast.error(error.response.data.message)
                

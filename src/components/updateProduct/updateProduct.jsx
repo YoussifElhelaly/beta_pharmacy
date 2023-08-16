@@ -17,6 +17,7 @@ import ReactLoading from 'react-loading';
 import Cookies from 'js-cookie'
 import editOpen from '../../../Atom/editOpen'
 import DetailsProductOpen from '../../../Atom/DetailsProductOpen'
+import checkLog from '@/checkLoggin'
 
 
 
@@ -75,8 +76,8 @@ function UpdateProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }
@@ -125,8 +126,8 @@ function UpdateProduct(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
                 console.log(error)
                 setIsLoading(false)

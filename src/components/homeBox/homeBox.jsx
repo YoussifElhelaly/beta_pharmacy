@@ -5,6 +5,7 @@ import token from "../../../Atom/accessToken"
 import { BaseUrl } from "@/app/layout"
 import { Skeleton } from "@mui/material"
 import Cookies from "js-cookie"
+import checkLog from "@/checkLoggin"
 
 function HomeBox(props) {
 
@@ -37,8 +38,8 @@ function HomeBox(props) {
             })
             .catch(function (error) {
                 if (error.response.status === 401) {
-                    Cookies.set("islogged", false)
-                    window.location.reload()
+                    checkLog()
+
                 }
 
             }
