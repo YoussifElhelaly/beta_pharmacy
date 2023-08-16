@@ -22,6 +22,7 @@ import DetailsProductOpen from '../../../Atom/DetailsProductOpen'
 
 function UpdateProduct(props) {
 
+    console.log(props)
     const file = useRef(null)
     const [isProductOpen, setIsProductOpen] = useRecoilState(DetailsProductOpen)
     const [isAddOpen, setIsAddOpen] = useRecoilState(categoryOpen)
@@ -31,6 +32,7 @@ function UpdateProduct(props) {
     const categoryInp = useRef()
     const quanInp = useRef()
     const expireInp = useRef()
+    const limitInp = useRef()
     const date = new Date()
     const today = date.toLocaleDateString()
     const [isLoading, setIsLoading] = useState(false)
@@ -50,7 +52,9 @@ function UpdateProduct(props) {
         categoryInp.current.value = null
         quanInp.current.value = null
         expireInp.current.value = null
+        limitInp.current.value = null
         file.current.value = null
+
     }
     const tokken = useRecoilValue(token)
     const [data, setDate] = useState([])
@@ -98,7 +102,7 @@ function UpdateProduct(props) {
         formData.append("expDate", expireInp.current.value)
         formData.append("medicineImg", image)
         formData.append("stock", quanInp.current.value)
-        formData.append("stockWarnLimit", 3)
+        formData.append("stockWarnLimit", limitInp.current.value)
         formData.append("barCode", codeInp.current.value)
 
         const options = {
@@ -138,10 +142,10 @@ function UpdateProduct(props) {
                     <div className="addImage w-[390px] flex justify-center items-center flex-col">
                         <h4 className='text-[20px] mb-2'>اضافة صور المنتج</h4>
                         <div className="img relative">
-                            <input type="file" ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
-                            <Image alt='icon' onChange={(e)=>{
+                            <input type="file" onChange={(e) => {
                                 onImageChange(e)
-                            }} src={image} width={390} height={350}></Image>
+                            }} ref={file} className='absolute w-full h-full opacity-0 cursor-pointer' />
+                            <Image alt='icon' src={image} width={390} height={350}></Image>
                         </div>
                     </div>
                     <div className='form w-1/2'>
@@ -178,6 +182,15 @@ function UpdateProduct(props) {
                             <div className="quan w-full">
 
                                 <input ref={quanInp} type="number" defaultValue={props.edit.stock} />
+                            </div>
+                        </div>
+                        <div className="input py-2 flex flex-col items-end w-full">
+                            <label htmlFor="">حد المخزون</label>
+                            <div className="quan w-full">
+                                <i className="fa-solid fa-circle-exclamation absolute bottom-[12px] right-[-50px] cursor-pointer text-[28px] text-red">
+                                    <p>سيتم تنبيهك في حال وصول المنتج لهذا الحد</p>
+                                </i>
+                                <input ref={limitInp} type="number" defaultValue={props.edit.stock_warn_limit} />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">

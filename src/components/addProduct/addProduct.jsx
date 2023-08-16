@@ -29,6 +29,7 @@ function AddProduct() {
     const categoryInp = useRef()
     const quanInp = useRef()
     const expireInp = useRef()
+    const limitInp = useRef()
     const date = new Date()
     const today = date.toLocaleDateString()
     const [isLoading, setIsLoading] = useState(false)
@@ -59,6 +60,7 @@ function AddProduct() {
         categoryInp.current.value = null
         quanInp.current.value = null
         expireInp.current.value = null
+        limitInp.current.value = null
         file.current.value = null
         setImage(addImage)
     }
@@ -99,7 +101,7 @@ function AddProduct() {
         formData.append("expDate", formatDate(new Date(expireInp.current.value)))
         formData.append("medicineImg", file.current.files[0] == undefined ? "" : file.current.files[0])
         formData.append("stock", quanInp.current.value)
-        formData.append("stockWarnLimit", 3)
+        formData.append("stockWarnLimit", limitInp.current.value)
         formData.append("barCode", codeInp.current.value)
 
         console.log(formatDate(new Date(expireInp.current.value)))
@@ -133,7 +135,7 @@ function AddProduct() {
             );
     }
     return (
-        <div className="addProduct  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="addProduct  z-50 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary h-full xl:h-fit w-[1150px] px-[50px]">
                 <div className="flex justify-between">
                     <Image alt="icon" src={BackIcon} onClick={() => setIsProductOpen(false)} className='cursor-pointer absolute left-[50px] top-[10px]'></Image>
@@ -180,6 +182,15 @@ function AddProduct() {
                             <div className="quan w-full">
 
                                 <input ref={quanInp} type="number" />
+                            </div>
+                        </div>
+                        <div className="input py-2 flex flex-col items-end w-full">
+                            <label htmlFor="">حد المخزون</label>
+                            <div className="quan w-full">
+                                <i className="fa-solid fa-circle-exclamation absolute bottom-[12px] right-[-50px] cursor-pointer text-[28px] text-red">
+                                    <p>سيتم تنبيهك في حال وصول المنتج لهذا الحد</p>
+                                </i>
+                                <input ref={limitInp} type="number" />
                             </div>
                         </div>
                         <div className="input py-2  flex flex-col items-end w-full">

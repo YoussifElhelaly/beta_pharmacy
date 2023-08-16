@@ -17,7 +17,7 @@ function DetailsProduct(props) {
 
     return (
 
-        <div className="createSale  z-10 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
+        <div className="createSale  z-50 bg-[#5f6076d2] left-0 top-0 absolute w-full h-full flex justify-center items-center">
             <div className="relative content bg-bgPrimary w-[1150px] ">
                 <Image alt='icon' onClick={() => {
                     setSearch(false)
